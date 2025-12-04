@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Cybersecurity & Networking Portfolio</title>
+  <style>
+    /* Neon gradient color cycle */
+    @keyframes neonCycle {
+      0% { color: #00ffe5; text-shadow: 0 0 12px #00ffe5; }
+      33% { color: #7b5bff; text-shadow: 0 0 12px #7b5bff; }
+      66% { color: #39ff14; text-shadow: 0 0 12px #39ff14; }
+      100% { color: #00ffe5; text-shadow: 0 0 12px #00ffe5; }
+    }
+
+    h1, h2 {
+      animation: neonCycle 6s infinite linear;
+    }
+
+    /* Different neon colors for each project card */
+    .projects .card:nth-child(1) h3 { color: #00ffe5; text-shadow: 0 0 10px #00ffe5; }
+    .projects .card:nth-child(2) h3 { color: #7b5bff; text-shadow: 0 0 10px #7b5bff; }
+    .projects .card:nth-child(3) h3 { color: #ff5bf7; text-shadow: 0 0 10px #ff5bf7; }
+    .projects .card:nth-child(4) h3 { color: #39ff14; text-shadow: 0 0 10px #39ff14; }
+    body {
+      margin: 0;
+      font-family: 'Share Tech Mono', monospace;
+      background: #000;
+      color: #e0e0e0;
+      overflow-x: hidden;
+    }
+
+    /* Glowing neon grid background */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, rgba(0,255,255,0.08) 0%, rgba(0,0,0,1) 70%), repeating-linear-gradient(0deg, transparent 0px, transparent 48px, rgba(0,255,255,0.08) 49px), repeating-linear-gradient(90deg, transparent 0px, transparent 48px, rgba(0,255,255,0.08) 49px);
+      z-index: -1;
+    }
+
+    header {
+      background: #050505cc;
+      padding: 25px;
+      text-align: center;
+      border-bottom: 1px solid #00ffe5;
+      box-shadow: 0 0 15px #00ffe5;
+      animation: glow 2.5s infinite alternate;
+    }
+    @keyframes glow {
+      from { box-shadow: 0 0 5px #00ffe5; }
+      to { box-shadow: 0 0 25px #00ffe5; }
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.6rem;
+      color: #00ffe5;
+      text-shadow: 0 0 10px #00ffe5;
+    }
+
+    nav a {
+      color: #5af5ff;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    nav a:hover {
+      text-shadow: 0 0 10px #00ffe5;
+      color: white;
+    }
+
+    .hero {
+      padding: 80px 20px;
+      text-align: center;
+      animation: fadeIn 2.5s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero h2 {
+      font-size: 2.3rem;
+      color: #00ffe5;
+      text-shadow: 0 0 10px #00ffe5;
+    }
+
+    .section {
+      padding: 40px 20px;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+    }
+
+    .card {
+      background: #0a0a0a;
+      padding: 25px;
+      border-radius: 15px;
+      border: 1px solid #111;
+      transition: 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Cyber pulse animation */
+    .card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(120deg, transparent, rgba(0,255,255,0.3), transparent);
+      transition: 0.5s;
+    }
+
+    .card:hover::before {
+      left: 100%;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 0 20px #00ffe5;
+      border-color: #00ffe5;
+    }
+
+    .card h3 {
+      margin-top: 0;
+      color: #00ffe5;
+      text-shadow: 0 0 8px #00ffe5;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+      border-top: 1px solid #00ffe5;
+      background: #050505cc;
+    }
+  </style>
+<script>
+    /* Binary rain animation */
+    document.addEventListener('DOMContentLoaded', () => {
+      const canvas = document.createElement('canvas');
+      canvas.style.position = 'fixed';
+      canvas.style.top = '0';
+      canvas.style.left = '0';
+      canvas.style.width = '100%';
+      canvas.style.height = '100%';
+      canvas.style.zIndex = '-2';
+      document.body.appendChild(canvas);
+
+      const ctx = canvas.getContext('2d');
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      const letters = '01';
+      const fontSize = 16;
+      const columns = canvas.width / fontSize;
+      const drops = Array(Math.floor(columns)).fill(1);
+
+      function draw() {
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        ctx.fillStyle = '#00ffe5';
+        ctx.font = fontSize + 'px monospace';
+
+        for (let i = 0; i < drops.length; i++) {
+          const text = letters[Math.floor(Math.random() * letters.length)];
+          ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+          if (drops[i] * fontSize > canvas.height && Math.random() > 0.95) {
+            drops[i] = 0;
+          }
+          drops[i]++;
+        }
+      }
+
+      setInterval(draw, 50);
+    });
+  </script>
+
+  <style>
+    /* Additional glowing borders */
+    .card {
+      border: 1px solid #0ff5;
+      box-shadow: 0 0 8px #0ff5;
+    }
+    .card:hover {
+      box-shadow: 0 0 25px #00ffe5, 0 0 35px #00bfff inset;
+    }
+
+    /* Terminal intro box */
+    .terminal {
+      max-width: 700px;
+      margin: 40px auto;
+      background: #000;
+      border: 2px solid #00ffe5;
+      padding: 20px;
+      font-family: 'Share Tech Mono', monospace;
+      color: #00ffe5;
+      border-radius: 10px;
+      box-shadow: 0 0 15px #00ffe5;
+      animation: fadeIn 2s ease;
+    }
+
+    @keyframes typing {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+
+    @keyframes blink {
+      0% { border-right-color: #00ffe5; }
+      50% { border-right-color: transparent; }
+      100% { border-right-color: #00ffe5; }
+    }
+
+    .terminal-text {
+      overflow: hidden;
+      white-space: nowrap;
+      width: 0;
+      border-right: 2px solid #00ffe5;
+      animation: typing 4s steps(40, end) forwards, blink .7s infinite;
+    }
+  </style>
+<style>
+    /* Cursor glow */
+    body::after {
+      content: "";
+      position: fixed;
+      width: 30px;
+      height: 30px;
+      background: radial-gradient(circle, #00ffe5aa, transparent);
+      border-radius: 50%;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      transition: 0.05s;
+      z-index: 9999;
+    }
+    body.add-glow::after {
+      left: var(--x);
+      top: var(--y);
+    }
+
+    /* Hologram card effect */
+    .card {
+      position: relative;
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(0,255,229,0.4);
+    }
+    .card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, transparent, rgba(0,255,229,0.15), transparent);
+      opacity: 0;
+      transition: 0.3s;
+    }
+    .card:hover::after {
+      opacity: 1;
+    }
+
+    /* Theme switch button */
+    #themeBtn {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      padding: 10px 18px;
+      background: #00ffe5;
+      border: none;
+      color: #000;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+      z-index: 2000;
+    }
+
+    /* Project filter buttons */
+    .filter-bar {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+    .filter-bar button {
+      margin: 5px;
+      padding: 10px 15px;
+      background: #00ffe5;
+      border: none;
+      color: #000;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .hidden { display: none; }
+  </style>
+
+  <script>
+    /* Cursor glow tracking */
+    document.addEventListener('mousemove', (e) => {
+      document.body.classList.add('add-glow');
+      document.body.style.setProperty('--x', e.clientX + 'px');
+      document.body.style.setProperty('--y', e.clientY + 'px');
+    });
+
+    /* Theme switcher */
+    const themes = [
+      { bg: '#000', glow: '#00ffe5' },
+      { bg: '#0a0018', glow: '#7b5bff' },
+      { bg: '#001a00', glow: '#39ff14' }
+    ];
+    let t = 0;
+    function switchTheme() {
+      t = (t + 1) % themes.length;
+      document.body.style.background = themes[t].bg;
+      document.querySelectorAll('h1, h2').forEach(h => {
+        h.style.color = themes[t].glow;
+      });
+    }
+
+    /* Filter system */
+    function filterProjects(type) {
+      document.querySelectorAll('.card').forEach(card => {
+        if (type === 'all' || card.dataset.type === type) card.classList.remove('hidden');
+        else card.classList.add('hidden');
+      });
+    }
+  </script>
+
+</head>
+<body>
+
+  
+
+  
+
+  <div class="terminal">
+    <div class="terminal-text">Initializing Cyber Portfolio... Access Granted ✔</div>
+  </div>
+  <header>
+    <h1>Yash — Cybersecurity & Networking Portfolio</h1>
+    <nav>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h2>Welcome, Cyber Explorer</h2>
+    <p>Dive into my cybersecurity & networking projects, built with passion and curiosity.</p>
+  </section>
+
+  <section id="projects" class="section">
+    <h2 style="color: #00ffe5; text-shadow: 0 0 10px #00ffe5;">My Projects</h2>
+    <div class="projects">
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1200&auto=format" style="width:100%;border-radius:10px;margin-bottom:10px;">
+        <h3>Network Scanner</h3>
+        <p>Python-based LAN scanner to detect active hosts, ports & vulnerabilities.</p>
+      </div>
+
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1200&auto=format" style="width:100%;border-radius:10px;margin-bottom:10px;">
+        <h3>Firewall Rules Audit</h3>
+        <p>Optimised IPTables & UFW for SOC-level secure environments.</p>
+      </div>
+
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1200&auto=format" style="width:100%;border-radius:10px;margin-bottom:10px;">
+        <h3>Linux Hardening Script</h3>
+        <p>Bash automation for SSH, password policy & security updates.</p>
+      </div>
+
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1200&auto=format" style="width:100%;border-radius:10px;margin-bottom:10px;">
+        <h3>Wi-Fi Packet Capture</h3>
+        <p>Used Wireshark & aircrack-ng to capture, decode & analyse wireless packets.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills" class="section">
+    <h2 style="color: #00ffe5; text-shadow: 0 0 10px #00ffe5;">Skills</h2>
+    <ul>
+      <li>Networking (Routing, Switching, VLAN, Subnetting)</li>
+      <li>Penetration Testing Basics</li>
+      <li>Linux System Administration</li>
+      <li>Python & Bash Scripting</li>
+      <li>Wireshark, Nmap, BurpSuite</li>
+      <li>AWS Cloud Foundations</li>
+    </ul>
+  </section>
+
+  <section id="contact" class="section">
+    <h2 style="color: #00ffe5; text-shadow: 0 0 10px #00ffe5;">Contact Me</h2>
+    <p>Email: your.email@example.com</p>
+    <p>LinkedIn: linkedin.com/in/yourprofile</p>
+  </section>
+
+  <footer>
+    <p>© 2025 Yash — Cybersecurity & Networking Portfolio</p>
+  </footer>
+</body>
+</html>
