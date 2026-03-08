@@ -1,391 +1,381 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
- <meta charset="UTF-8" />
- <meta name="viewport" content="width=device-width, initial-scale=1" />
- <title>Yash Cahoolessur — Cybersecurity & Networking Portfolio</title>
- <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<!DOCTYPE html> 
+<html lang="en"> 
+<head> 
+ <meta charset="UTF-8" /> 
+ <meta name="viewport" content="width=device-width, initial-scale=1" /> 
+ <title>Yash Cahoolessur — Cybersecurity & Networking Portfolio</title> 
+ <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet"> 
  <style>
- :root{ --c-neon:#00ffe5; --c-neon-2:#7b5bff; --c-neon-3:#39ff14; --text:#e0e0e0; --bg:#000; --tap:48px; --container:1100px; --header-height:64px; }
- @media (prefers-reduced-motion: reduce){ *{ animation-duration:0.001ms!important; animation-iteration-count:1!important; transition-duration:0.001ms!important; scroll-behavior:auto!important; } }
- @keyframes neonCycle{0%{color:#00ffe5; text-shadow:0 0 12px #00ffe5;}33%{color:#7b5bff; text-shadow:0 0 12px #7b5bff;}66%{color:#39ff14; text-shadow:0 0 12px #39ff14;}100%{color:#00ffe5; text-shadow:0 0 12px #00ffe5;}}
- h1, h2{ animation: neonCycle 6s linear infinite; }
- html,body{ height:100%; }
- body{ margin:0; font-family:'Share Tech Mono', monospace; background:var(--bg); color:var(--text); overflow-x:hidden; line-height:1.55; font-size:16px; -webkit-text-size-adjust:100%; text-rendering:optimizeLegibility; }
- body::before{ content:""; position:fixed; inset:0; background:radial-gradient(circle, rgba(0,255,255,0.08) 0%, rgba(0,0,0,1) 70%), repeating-linear-gradient(0deg, transparent 0px, transparent 48px, rgba(0,255,255,0.08) 49px), repeating-linear-gradient(90deg, transparent 0px, transparent 48px, rgba(0,255,255,0.08) 49px); z-index:-1; }
- header{ position:sticky; top:0; background:#050505cc; padding:16px 14px; border-bottom:1px solid var(--c-neon); box-shadow:0 0 15px var(--c-neon); animation:glow 2.5s infinite alternate; backdrop-filter: blur(6px); z-index:10000; }
- @keyframes glow{ from{box-shadow:0 0 5px var(--c-neon);} to{box-shadow:0 0 25px var(--c-neon);} }
- header .bar{ max-width:var(--container); margin:0 auto; display:flex; align-items:center; justify-content:space-between; gap:12px; }
- header h1{ margin:0; font-size: clamp(1.15rem, 2.5vw, 2rem); color:var(--c-neon); text-shadow:0 0 10px var(--c-neon); }
- .nav-links{ display:flex; gap:14px; align-items:center; }
- .nav-links a{ color:#5af5ff; text-decoration:none; font-weight:bold; transition:0.25s; padding:10px 10px; border-radius:8px; min-height:var(--tap); display:inline-flex; align-items:center; }
- .nav-links a:focus-visible{ outline:2px solid var(--c-neon); outline-offset:2px; }
- .nav-links a:hover{ text-shadow:0 0 10px var(--c-neon); color:#fff; }
- .nav-toggle{ display:none; background:#00000080; color:var(--c-neon); border:1px solid #00ffe544; border-radius:10px; padding:10px 12px; line-height:1; min-height:var(--tap); }
- .nav-toggle:focus-visible{ outline:2px solid var(--c-neon); outline-offset:2px; }
- .hero{ padding:64px 18px 48px; text-align:center; animation:fadeIn 1.2s ease; }
- @keyframes fadeIn{ from{opacity:0; transform:translateY(12px);} to{opacity:1; transform:none;} }
- .hero h2{ font-size:clamp(1.25rem,5vw,2rem); color:var(--c-neon); text-shadow:0 0 10px var(--c-neon); margin:0 0 6px; }
- .section{ padding:28px 16px; max-width:var(--container); margin:auto; scroll-margin-top: var(--header-height); }
- .card{ background:#0a0a0a; padding:18px; border-radius:14px; border:1px solid #0ff5; box-shadow:0 0 8px #0ff5; transition:transform .25s, box-shadow .25s, border-color .25s; position:relative; overflow:hidden; backdrop-filter:blur(4px); z-index:1; }
- .card::before{ content:""; position:absolute; inset:0; left:-100%; background:linear-gradient(120deg, transparent, rgba(0,255,255,0.3), transparent); transition:0.5s; }
- .card:hover::before{ left:100%; }
- .card:hover{ transform:translateY(-4px); box-shadow:0 0 16px var(--c-neon), 0 0 24px #00bfff inset; border-color:var(--c-neon); }
- .card h3{ margin-top:0; color:var(--c-neon); text-shadow:0 0 8px var(--c-neon); font-size: clamp(1rem, 3.5vw, 1.25rem); }
- footer{ text-align:center; padding:18px; margin-top:28px; border-top:1px solid var(--c-neon); background:#050505cc; }
- .terminal{ max-width:720px; margin:18px auto 0; background:#000; border:2px solid var(--c-neon); padding:14px; color:var(--c-neon); border-radius:10px; box-shadow:0 0 15px var(--c-neon); animation:fadeIn 0.8s ease; }
- @keyframes typing{ from{width:0;} to{width:100%;} }
- @keyframes blink{ 0%{border-right-color:var(--c-neon);} 50%{border-right-color:transparent;} 100%{border-right-color:var(--c-neon);} }
- .terminal-text{ overflow:hidden; white-space:nowrap; width:0; border-right:2px solid var(--c-neon); animation:typing 3.2s steps(36,end) forwards, blink .7s infinite; font-size: clamp(.9rem, 3.2vw, 1rem); }
- .kpis{ display:grid; grid-template-columns: repeat(4, minmax(150px,1fr)); gap:12px; margin-bottom:12px; }
- .kpi{ background:#070707; border:1px solid #00ffe533; border-radius:10px; padding:12px; box-shadow:0 0 12px #00ffe511 inset; text-align:center; }
- .kpi-value{ font-size:clamp(1.1rem,5vw,1.6rem); color:var(--c-neon); text-shadow:0 0 10px var(--c-neon); }
- .kpi-label{ font-size:.85rem; color:#9adfe0 }
- .map{ position:relative; height:420px; background:#030303; border:1px solid var(--c-neon); border-radius:10px; overflow:hidden; box-shadow:0 0 20px #00ffe533 inset; contain:layout paint; }
- #globe{ width:100%; height:100%; display:block; }
- .map-overlay{ position:absolute; inset:0; pointer-events:none; display:flex; justify-content:flex-end; align-items:flex-end; padding:8px; }
- .legend{ background:#000a; border:1px solid #00ffe533; padding:6px 10px; border-radius:8px; font-size:.8rem; color:#9adfe0; }
- .dot{ display:inline-block; width:8px; height:8px; border-radius:50%; margin:0 6px 0 10px }
- .dot-src{ background:#ff4d4d; box-shadow:0 0 8px #ff4d4d }
- .dot-dst{ background:#48f7ff; box-shadow:0 0 8px #48f7ff }
- .line-sample{ display:inline-block; width:40px; height:2px; background:linear-gradient(90deg,#ff4d4d, #48f7ff); margin-left:10px; box-shadow:0 0 8px var(--c-neon); }
- .alerts{ margin-top:14px; background:#070707; border:1px solid #00ffe533; border-radius:10px; overflow:hidden; }
- .alerts-header{ background:#031314; color:var(--c-neon); padding:10px 12px; border-bottom:1px solid #00ffe533; font-weight:bold; letter-spacing:.5px; }
- .alerts-body{ max-height:180px; overflow:auto; font-family:'Share Tech Mono', monospace; }
- .alert-item{ padding:8px 12px; border-bottom:1px dashed #0d3c40; }
- .alert-item:last-child{ border-bottom:none }
- .about-wrap{ display:flex; gap:18px; align-items:center; flex-wrap:wrap; }
- .profile{ width:132px; height:132px; border-radius:50%; overflow:hidden; position:relative; flex:0 0 auto; }
- .profile::before{ content:''; position:absolute; inset:-4px; border-radius:50%; background:conic-gradient(var(--c-neon), var(--c-neon-2), var(--c-neon-3), var(--c-neon)); filter:blur(6px); z-index:0; }
- .profile img{ position:relative; z-index:1; width:100%; height:100%; object-fit:cover; display:block; }
- .about-text{ flex:1 1 280px; min-width:260px; font-size:clamp(.95rem, 3.3vw, 1rem); }
- .profile-zoom{ all:unset; cursor:zoom-in; display:block; line-height:0; border-radius:50%; }
- .profile-zoom:focus-visible{ outline:2px solid var(--c-neon); outline-offset:2px; }
- .lightbox-backdrop{ position: fixed; inset: 0; background: rgba(0,0,0,0.88); display: none; align-items: center; justify-content: center; z-index: 9999; padding: 24px; }
- .lightbox-backdrop.open{ display:flex; }
- .lightbox-img-wrap{ position: relative; max-width: min(92vw, 780px); max-height: 92vh; border-radius: 14px; overflow: hidden; background: #000; border: 1px solid #00ffe544; box-shadow: 0 0 28px #00ffe588; }
- .lightbox-img-wrap img{ display:block; width:100%; height:auto; }
- .lightbox-close{ position: absolute; top: 8px; right: 10px; cursor: pointer; background: #000000aa; color: var(--c-neon); border: 1px solid #00ffe544; border-radius: 8px; padding: 10px 12px; font-family: inherit; min-height: var(--tap); }
- .lightbox-close:hover{ background:#001a1aaa; }
- canvas.bg-rain{ position:fixed; inset:0; width:100%; height:100%; z-index:-2; }
- @media (max-width:900px){ .section{ padding:24px 14px; } }
- @media (max-width:760px){ .nav-toggle{ display:inline-flex; align-items:center; justify-content:center; } .nav-links{ position:fixed; top:64px; right:12px; left:12px; display:none; flex-direction:column; gap:6px; background:#050505f2; border:1px solid #00ffe544; border-radius:12px; padding:8px; box-shadow:0 10px 30px #000, 0 0 18px #00ffe522; z-index:10001; } .nav-links.open{ display:flex; } .nav-links a{ width:100%; justify-content:center; padding:14px; font-size:1rem; } .kpis{ grid-template-columns: repeat(2, minmax(140px,1fr)); } .map{ height:360px; } .about-wrap{ flex-direction:column; align-items:center; text-align:center; } .about-text{ min-width:auto; } .profile{ margin-bottom:10px; } }
- @media (max-width:420px){ header h1{ font-size:1.05rem; } .hero{ padding-top:48px; } .map{ height:320px; } }
+/* Global justified alignment */
+body, p, li, .about-text, .section, .card {
+    text-align: justify;
+}
  
- /* === Skills (Progress Bars) === */
- .skills-grid{
-   display:grid;
-   grid-template-columns: repeat(2, minmax(220px, 1fr));
-   gap:12px 18px;
- }
- 
- @media (max-width:680px){
-   .skills-grid{ grid-template-columns: 1fr; }
- }
- 
- .skill{
-   display:flex;
-   flex-direction:column;
-   gap:8px;
-   background:#070707;
-   border:1px solid #00ffe533;
-   border-radius:10px;
-   padding:12px;
-   box-shadow:0 0 12px #00ffe511 inset;
- }
- 
- .skill-head{
-   display:flex;
-   align-items:center;
-   justify-content:space-between;
-   gap:10px;
-   font-size:.95rem;
- }
- 
- .skill-name{
-   color:#9adfe0;
- }
- 
- .skill-level{
-   color:var(--c-neon);
-   text-shadow:0 0 6px var(--c-neon);
-   font-weight:bold;
-   min-width:42px;
-   text-align:right;
- }
- 
- .skill-bar{
-   position:relative;
-   height:10px;
-   border-radius:999px;
-   background:linear-gradient(90deg, #022, #033);
-   border:1px solid #00ffe544;
-   overflow:hidden;
-   box-shadow: inset 0 0 10px #00ffe522;
- }
- 
- .skill-fill{
-   --level: 0%;
-   width: var(--level);
-   height:100%;
-   background:linear-gradient(90deg, var(--c-neon), var(--c-neon-2), var(--c-neon-3));
-   box-shadow:0 0 12px #00ffe5;
-   border-right:1px solid #fff3;
-   transition: width .9s ease;
- }
- 
- /* Optional: animate on first paint */
- .skill-fill[data-animate="true"]{ width:0; }
- .skill-fill[data-animate="true"].go{ width: var(--level); }
- </style>
- <script>
- document.addEventListener('DOMContentLoaded', () => {
- const canvas = document.createElement('canvas');
- canvas.className = 'bg-rain';
- document.body.appendChild(canvas);
- const ctx = canvas.getContext('2d', { alpha:true });
- const state = { running: true, letters:'01', fontSize:16, drops:[], columns:0 };
- function size(){
- const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
- const w = canvas.clientWidth = window.innerWidth;
- const h = canvas.clientHeight = window.innerHeight;
- canvas.width = Math.floor(w * dpr);
- canvas.height = Math.floor(h * dpr);
- ctx.setTransform(dpr,0,0,dpr,0,0);
- state.columns = Math.floor(w / state.fontSize);
- state.drops = Array(state.columns).fill(1);
- }
- size();
- let rAF;
- function draw(){
- if(!state.running){ rAF = requestAnimationFrame(draw); return; }
- const { fontSize, letters, drops } = state;
- ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
- ctx.fillRect(0, 0, canvas.clientWidth, canvas.clientHeight);
- ctx.fillStyle = '#00ffe5';
- ctx.font = fontSize + 'px monospace';
- for (let i=0; i<drops.length; i++) {
- const text = letters[Math.floor(Math.random()*letters.length)];
- ctx.fillText(text, i*fontSize, drops[i]*fontSize);
- if (drops[i]*fontSize > canvas.clientHeight && Math.random() > 0.95) drops[i] = 0;
- drops[i]++;
- }
- rAF = requestAnimationFrame(draw);
- }
- rAF = requestAnimationFrame(draw);
- const onVis = () => { state.running = (document.visibilityState === 'visible'); };
- document.addEventListener('visibilitychange', onVis);
- let rT; window.addEventListener('resize', () => { clearTimeout(rT); rT = setTimeout(size, 120); });
- });
- </script>
-</head>
-<body>
- <div class="terminal"><div class="terminal-text">Initializing Cyber Portfolio... Access Granted ✔</div></div><br>
- <header>
- <div class="bar">
- <h1>Yash Cahoolessur — Cybersecurity & Networking Portfolio</h1>
- <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="siteNav" aria-label="Open navigation">☰ Menu</button>
- <nav id="siteNav" class="nav-links" role="navigation">
- <a href="#about">About</a>
- <a href="#experience">Experience</a>
- <a href="#skills">Skills</a>
- <!-- <a href="#threatmap">Threat-Map</a> -->
- <a href="#contact">Contact</a>
- </nav>
- </div>
- </header>
- <section class="hero">
- <h2>Welcome, Cyber Explorer</h2>
- <p></p>
- </section>
- <section id="about" class="section" style="content-visibility:auto; contain-intrinsic-size:600px;">
- <h2>About Me</h2>
- <div class="card">
- <div class="about-wrap">
- <div class="profile">
- <button class="profile-zoom" aria-label="Open larger profile photo">
- <img src="IMG_7641.PNG" alt="Profile photo" loading="lazy" decoding="async" fetchpriority="high" />
- </button>
- </div>
- <div class="about-text">
- <p>
+ :root{ --c-neon:#00ffe5; --c-neon-2:#7b5bff; --c-neon-3:#39ff14; --text:#e0e0e0; --bg:#000; --tap:48px; --container:1100px; --header-height:64px; } 
+ @media (prefers-reduced-motion: reduce){ *{ animation-duration:0.001ms!important; animation-iteration-count:1!important; transition-duration:0.001ms!important; scroll-behavior:auto!important; } } 
+ @keyframes neonCycle{0%{color:#00ffe5; text-shadow:0 0 12px #00ffe5;}33%{color:#7b5bff; text-shadow:0 0 12px #7b5bff;}66%{color:#39ff14; text-shadow:0 0 12px #39ff14;}100%{color:#00ffe5; text-shadow:0 0 12px #00ffe5;}} 
+ h1, h2{ animation: neonCycle 6s linear infinite; } 
+ html,body{ height:100%; } 
+ body{ margin:0; font-family:'Share Tech Mono', monospace; background:var(--bg); color:var(--text); overflow-x:hidden; line-height:1.55; font-size:16px; -webkit-text-size-adjust:100%; text-rendering:optimizeLegibility; } 
+ body::before{ content:""; position:fixed; inset:0; background:radial-gradient(circle, rgba(0,255,255,0.08) 0%, rgba(0,0,0,1) 70%), repeating-linear-gradient(0deg, transparent 0px, transparent 48px, rgba(0,255,255,0.08) 49px), repeating-linear-gradient(90deg, transparent 0px, transparent 48px, rgba(0,255,255,0.08) 49px); z-index:-1; } 
+ header{ position:sticky; top:0; background:#050505cc; padding:16px 14px; border-bottom:1px solid var(--c-neon); box-shadow:0 0 15px var(--c-neon); animation:glow 2.5s infinite alternate; backdrop-filter: blur(6px); z-index:10000; } 
+ @keyframes glow{ from{box-shadow:0 0 5px var(--c-neon);} to{box-shadow:0 0 25px var(--c-neon);} } 
+ header .bar{ max-width:var(--container); margin:0 auto; display:flex; align-items:center; justify-content:space-between; gap:12px; } 
+ header h1{ margin:0; font-size: clamp(1.15rem, 2.5vw, 2rem); color:var(--c-neon); text-shadow:0 0 10px var(--c-neon); } 
+ .nav-links{ display:flex; gap:14px; align-items:center; } 
+ .nav-links a{ color:#5af5ff; text-decoration:none; font-weight:bold; transition:0.25s; padding:10px 10px; border-radius:8px; min-height:var(--tap); display:inline-flex; align-items:center; } 
+ .nav-links a:focus-visible{ outline:2px solid var(--c-neon); outline-offset:2px; } 
+ .nav-links a:hover{ text-shadow:0 0 10px var(--c-neon); color:#fff; } 
+ .nav-toggle{ display:none; background:#00000080; color:var(--c-neon); border:1px solid #00ffe544; border-radius:10px; padding:10px 12px; line-height:1; min-height:var(--tap); } 
+ .nav-toggle:focus-visible{ outline:2px solid var(--c-neon); outline-offset:2px; } 
+ .hero{ padding:64px 18px 48px; text-align:center; animation:fadeIn 1.2s ease; } 
+ @keyframes fadeIn{ from{opacity:0; transform:translateY(12px);} to{opacity:1; transform:none;} } 
+ .hero h2{ font-size:clamp(1.25rem,5vw,2rem); color:var(--c-neon); text-shadow:0 0 10px var(--c-neon); margin:0 0 6px; } 
+ .section{ padding:28px 16px; max-width:var(--container); margin:auto; scroll-margin-top: var(--header-height); } 
+ .card{ background:#0a0a0a; padding:18px; border-radius:14px; border:1px solid #0ff5; box-shadow:0 0 8px #0ff5; transition:transform .25s, box-shadow .25s, border-color .25s; position:relative; overflow:hidden; backdrop-filter:blur(4px); z-index:1; } 
+ .card::before{ content:""; position:absolute; inset:0; left:-100%; background:linear-gradient(120deg, transparent, rgba(0,255,255,0.3), transparent); transition:0.5s; } 
+ .card:hover::before{ left:100%; } 
+ .card:hover{ transform:translateY(-4px); box-shadow:0 0 16px var(--c-neon), 0 0 24px #00bfff inset; border-color:var(--c-neon); } 
+ .card h3{ margin-top:0; color:var(--c-neon); text-shadow:0 0 8px var(--c-neon); font-size: clamp(1rem, 3.5vw, 1.25rem); } 
+ footer{ text-align:center; padding:18px; margin-top:28px; border-top:1px solid var(--c-neon); background:#050505cc; } 
+ .terminal{ max-width:720px; margin:18px auto 0; background:#000; border:2px solid var(--c-neon); padding:14px; color:var(--c-neon); border-radius:10px; box-shadow:0 0 15px var(--c-neon); animation:fadeIn 0.8s ease; } 
+ @keyframes typing{ from{width:0;} to{width:100%;} } 
+ @keyframes blink{ 0%{border-right-color:var(--c-neon);} 50%{border-right-color:transparent;} 100%{border-right-color:var(--c-neon);} } 
+ .terminal-text{ overflow:hidden; white-space:nowrap; width:0; border-right:2px solid var(--c-neon); animation:typing 3.2s steps(36,end) forwards, blink .7s infinite; font-size: clamp(.9rem, 3.2vw, 1rem); } 
+ .kpis{ display:grid; grid-template-columns: repeat(4, minmax(150px,1fr)); gap:12px; margin-bottom:12px; } 
+ .kpi{ background:#070707; border:1px solid #00ffe533; border-radius:10px; padding:12px; box-shadow:0 0 12px #00ffe511 inset; text-align:center; } 
+ .kpi-value{ font-size:clamp(1.1rem,5vw,1.6rem); color:var(--c-neon); text-shadow:0 0 10px var(--c-neon); } 
+ .kpi-label{ font-size:.85rem; color:#9adfe0 } 
+ .map{ position:relative; height:420px; background:#030303; border:1px solid var(--c-neon); border-radius:10px; overflow:hidden; box-shadow:0 0 20px #00ffe533 inset; contain:layout paint; } 
+ #globe{ width:100%; height:100%; display:block; } 
+ .map-overlay{ position:absolute; inset:0; pointer-events:none; display:flex; justify-content:flex-end; align-items:flex-end; padding:8px; } 
+ .legend{ background:#000a; border:1px solid #00ffe533; padding:6px 10px; border-radius:8px; font-size:.8rem; color:#9adfe0; } 
+ .dot{ display:inline-block; width:8px; height:8px; border-radius:50%; margin:0 6px 0 10px } 
+ .dot-src{ background:#ff4d4d; box-shadow:0 0 8px #ff4d4d } 
+ .dot-dst{ background:#48f7ff; box-shadow:0 0 8px #48f7ff } 
+ .line-sample{ display:inline-block; width:40px; height:2px; background:linear-gradient(90deg,#ff4d4d, #48f7ff); margin-left:10px; box-shadow:0 0 8px var(--c-neon); } 
+ .alerts{ margin-top:14px; background:#070707; border:1px solid #00ffe533; border-radius:10px; overflow:hidden; } 
+ .alerts-header{ background:#031314; color:var(--c-neon); padding:10px 12px; border-bottom:1px solid #00ffe533; font-weight:bold; letter-spacing:.5px; } 
+ .alerts-body{ max-height:180px; overflow:auto; font-family:'Share Tech Mono', monospace; } 
+ .alert-item{ padding:8px 12px; border-bottom:1px dashed #0d3c40; } 
+ .alert-item:last-child{ border-bottom:none } 
+ .about-wrap{ display:flex; gap:18px; align-items:center; flex-wrap:wrap; } 
+ .profile{ width:132px; height:132px; border-radius:50%; overflow:hidden; position:relative; flex:0 0 auto; } 
+ .profile::before{ content:''; position:absolute; inset:-4px; border-radius:50%; background:conic-gradient(var(--c-neon), var(--c-neon-2), var(--c-neon-3), var(--c-neon)); filter:blur(6px); z-index:0; } 
+ .profile img{ position:relative; z-index:1; width:100%; height:100%; object-fit:cover; display:block; } 
+ .about-text{ flex:1 1 280px; min-width:260px; font-size:clamp(.95rem, 3.3vw, 1rem); } 
+ .profile-zoom{ all:unset; cursor:zoom-in; display:block; line-height:0; border-radius:50%; } 
+ .profile-zoom:focus-visible{ outline:2px solid var(--c-neon); outline-offset:2px; } 
+ .lightbox-backdrop{ position: fixed; inset: 0; background: rgba(0,0,0,0.88); display: none; align-items: center; justify-content: center; z-index: 9999; padding: 24px; } 
+ .lightbox-backdrop.open{ display:flex; } 
+ .lightbox-img-wrap{ position: relative; max-width: min(92vw, 780px); max-height: 92vh; border-radius: 14px; overflow: hidden; background: #000; border: 1px solid #00ffe544; box-shadow: 0 0 28px #00ffe588; } 
+ .lightbox-img-wrap img{ display:block; width:100%; height:auto; } 
+ .lightbox-close{ position: absolute; top: 8px; right: 10px; cursor: pointer; background: #000000aa; color: var(--c-neon); border: 1px solid #00ffe544; border-radius: 8px; padding: 10px 12px; font-family: inherit; min-height: var(--tap); } 
+ .lightbox-close:hover{ background:#001a1aaa; } 
+ canvas.bg-rain{ position:fixed; inset:0; width:100%; height:100%; z-index:-2; } 
+ @media (max-width:900px){ .section{ padding:24px 14px; } } 
+ @media (max-width:760px){ .nav-toggle{ display:inline-flex; align-items:center; justify-content:center; } .nav-links{ position:fixed; top:64px; right:12px; left:12px; display:none; flex-direction:column; gap:6px; background:#050505f2; border:1px solid #00ffe544; border-radius:12px; padding:8px; box-shadow:0 10px 30px #000, 0 0 18px #00ffe522; z-index:10001; } .nav-links.open{ display:flex; } .nav-links a{ width:100%; justify-content:center; padding:14px; font-size:1rem; } .kpis{ grid-template-columns: repeat(2, minmax(140px,1fr)); } .map{ height:360px; } .about-wrap{ flex-direction:column; align-items:center; text-align:center; } .about-text{ min-width:auto; } .profile{ margin-bottom:10px; } } 
+ @media (max-width:420px){ header h1{ font-size:1.05rem; } .hero{ padding-top:48px; } .map{ height:320px; } } 
+ /* === Skills (Progress Bars) === */ 
+ .skills-grid{ 
+ display:grid; 
+ grid-template-columns: repeat(2, minmax(220px, 1fr)); 
+ gap:12px 18px; 
+ } 
+ @media (max-width:680px){ 
+ .skills-grid{ grid-template-columns: 1fr; } 
+ } 
+ .skill{ 
+ display:flex; 
+ flex-direction:column; 
+ gap:8px; 
+ background:#070707; 
+ border:1px solid #00ffe533; 
+ border-radius:10px; 
+ padding:12px; 
+ box-shadow:0 0 12px #00ffe511 inset; 
+ } 
+ .skill-head{ 
+ display:flex; 
+ align-items:center; 
+ justify-content:space-between; 
+ gap:10px; 
+ font-size:.95rem; 
+ } 
+ .skill-name{ 
+ color:#9adfe0; 
+ } 
+ .skill-level{ 
+ color:var(--c-neon); 
+ text-shadow:0 0 6px var(--c-neon); 
+ font-weight:bold; 
+ min-width:42px; 
+ text-align:right; 
+ } 
+ .skill-bar{ 
+ position:relative; 
+ height:10px; 
+ border-radius:999px; 
+ background:linear-gradient(90deg, #022, #033); 
+ border:1px solid #00ffe544; 
+ overflow:hidden; 
+ box-shadow: inset 0 0 10px #00ffe522; 
+ } 
+ .skill-fill{ 
+ --level: 0%; 
+ width: var(--level); 
+ height:100%; 
+ background:linear-gradient(90deg, var(--c-neon), var(--c-neon-2), var(--c-neon-3)); 
+ box-shadow:0 0 12px #00ffe5; 
+ border-right:1px solid #fff3; 
+ transition: width .9s ease; 
+ } 
+ /* Optional: animate on first paint */ 
+ .skill-fill[data-animate="true"]{ width:0; } 
+ .skill-fill[data-animate="true"].go{ width: var(--level); } 
+ </style> 
+ <script> 
+ document.addEventListener('DOMContentLoaded', () => { 
+ const canvas = document.createElement('canvas'); 
+ canvas.className = 'bg-rain'; 
+ document.body.appendChild(canvas); 
+ const ctx = canvas.getContext('2d', { alpha:true }); 
+ const state = { running: true, letters:'01', fontSize:16, drops:[], columns:0 }; 
+ function size(){ 
+ const dpr = Math.min(window.devicePixelRatio || 1, 1.5); 
+ const w = canvas.clientWidth = window.innerWidth; 
+ const h = canvas.clientHeight = window.innerHeight; 
+ canvas.width = Math.floor(w * dpr); 
+ canvas.height = Math.floor(h * dpr); 
+ ctx.setTransform(dpr,0,0,dpr,0,0); 
+ state.columns = Math.floor(w / state.fontSize); 
+ state.drops = Array(state.columns).fill(1); 
+ } 
+ size(); 
+ let rAF; 
+ function draw(){ 
+ if(!state.running){ rAF = requestAnimationFrame(draw); return; } 
+ const { fontSize, letters, drops } = state; 
+ ctx.fillStyle = 'rgba(0, 0, 0, 0.1)'; 
+ ctx.fillRect(0, 0, canvas.clientWidth, canvas.clientHeight); 
+ ctx.fillStyle = '#00ffe5'; 
+ ctx.font = fontSize + 'px monospace'; 
+ for (let i=0; i<drops.length; i++) { 
+ const text = letters[Math.floor(Math.random()*letters.length)]; 
+ ctx.fillText(text, i*fontSize, drops[i]*fontSize); 
+ if (drops[i]*fontSize > canvas.clientHeight && Math.random() > 0.95) drops[i] = 0; 
+ drops[i]++; 
+ } 
+ rAF = requestAnimationFrame(draw); 
+ } 
+ rAF = requestAnimationFrame(draw); 
+ const onVis = () => { state.running = (document.visibilityState === 'visible'); }; 
+ document.addEventListener('visibilitychange', onVis); 
+ let rT; window.addEventListener('resize', () => { clearTimeout(rT); rT = setTimeout(size, 120); }); 
+ }); 
+ </script> 
+</head> 
+<body> 
+ <div class="terminal"><div class="terminal-text">Initializing Cyber Portfolio... Access Granted ✔</div></div><br> 
+ <header> 
+ <div class="bar"> 
+ <h1>Yash Cahoolessur — Cybersecurity & Networking Portfolio</h1> 
+ <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="siteNav" aria-label="Open navigation">☰ Menu</button> 
+ <nav id="siteNav" class="nav-links" role="navigation"> 
+ <a href="#about">About</a> 
+ <a href="#experience">Experience</a> 
+ <a href="#skills">Skills</a> 
+ <!-- <a href="#threatmap">Threat-Map</a> --> 
+ <a href="#contact">Contact</a> 
+ </nav> 
+ </div> 
+ </header> 
+ <section class="hero"> 
+ <h2>Welcome, Cyber Explorer</h2> 
+ <p></p> 
+ </section> 
+ <section id="about" class="section" style="content-visibility:auto; contain-intrinsic-size:600px;"> 
+ <h2>About Me</h2> 
+ <div class="card"> 
+ <div class="about-wrap"> 
+ <div class="profile"> 
+ <button class="profile-zoom" aria-label="Open larger profile photo"> 
+ <img src="IMG_7641.PNG" alt="Profile photo" loading="lazy" decoding="async" fetchpriority="high" /> 
+ </button> 
+ </div> 
+ <div class="about-text"> 
+ <p> 
  Cybersecurity-focused IT professional with enterprise experience in SAP security administration 
  and quality assurance. Currently pursuing a Master's in IT (Network & Cybersecurity) and actively 
  seeking SOC analyst and cyber defence opportunities. Passionate about threat detection, incident 
  response, and strengthening security posture through continuous learning and hands-on practice. 
- </p>
- </div>
- </div>
- </div>
- </section>
- <section id="experience" class="section">
- <h2>Professional Experience</h2>
- <div class="card">
- <h3>SAP Security Administrator — Accenture(Mauritius)</h3>
- <ul>
- <li>Managed SAP user roles and authorizations in enterprise systems.</li>
- <li>Performed access reviews and compliance checks.</li>
- <li>Investigated authorization issues and security incidents.</li>
- <li>Maintained role‑based access control (RBAC).</li>
- </ul>
- </div><br>
- <div class="card">
- <h3>QA Tester Intern — TotalEnergies(Mauritius)</h3>
- <ul>
- <li>Executed functional, regression and performance test cases with clear defect reporting.</li>
- <li>Partnered with developers to improve reliability and reduce escape defects.</li>
- <li>Documented reproducible steps, risks and mitigation notes.</li>
- <li>Contributed to secure SDLC practices and basic vulnerability validation.</li>
- </ul>
- </div>
- </section>
- <section id="skills" class="section">
- <h2>Skills</h2>
- <div class="card">
-   <div class="skills-grid">
-     <!-- Networking -->
-     <div class="skill" aria-label="Networking proficiency">
-       <div class="skill-head">
-         <span class="skill-name">Networking (Routing, Switching, VLAN, Subnetting)</span>
-         <span class="skill-level">90%</span>
-       </div>
-       <div class="skill-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="90" aria-label="Networking level">
-         <div class="skill-fill" style="--level:90%;" data-animate="true"></div>
-       </div>
-     </div>
- 
-     <!-- Linux -->
-     <div class="skill" aria-label="Linux proficiency">
-       <div class="skill-head">
-         <span class="skill-name">Linux System Administration</span>
-         <span class="skill-level">85%</span>
-       </div>
-       <div class="skill-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="85" aria-label="Linux System Administration level">
-         <div class="skill-fill" style="--level:85%;" data-animate="true"></div>
-       </div>
-     </div>
- 
-     <!-- Scripting -->
-     <div class="skill" aria-label="Scripting proficiency">
-       <div class="skill-head">
-         <span class="skill-name">Python &amp; Bash Scripting</span>
-         <span class="skill-level">80%</span>
-       </div>
-       <div class="skill-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="80" aria-label="Scripting level">
-         <div class="skill-fill" style="--level:80%;" data-animate="true"></div>
-       </div>
-     </div>
- 
-     <!-- Tools -->
-     <div class="skill" aria-label="Security tools proficiency">
-       <div class="skill-head">
-         <span class="skill-name">Wireshark, Nmap, Burp Suite</span>
-         <span class="skill-level">82%</span>
-       </div>
-       <div class="skill-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="82" aria-label="Security tools level">
-         <div class="skill-fill" style="--level:82%;" data-animate="true"></div>
-       </div>
-     </div>
- 
-     <!-- AD -->
-     <div class="skill" aria-label="Active Directory proficiency">
-       <div class="skill-head">
-         <span class="skill-name">Active Directory Fundamentals</span>
-         <span class="skill-level">75%</span>
-       </div>
-       <div class="skill-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="75" aria-label="Active Directory level">
-         <div class="skill-fill" style="--level:75%;" data-animate="true"></div>
-       </div>
-     </div>
- 
-     <!-- AWS -->
-     <div class="skill" aria-label="AWS proficiency">
-       <div class="skill-head">
-         <span class="skill-name">AWS Cloud Foundations</span>
-         <span class="skill-level">70%</span>
-       </div>
-       <div class="skill-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="70" aria-label="AWS level">
-         <div class="skill-fill" style="--level:70%;" data-animate="true"></div>
-       </div>
-     </div>
-   </div>
- </div>
- </section>
- <section id="threatmap" class="section">
- <h2>Global Cyber Threat Map</h2>
- <div class="kpis">
- <div class="kpi"><div class="kpi-value" id="kpi-threats">0</div><div class="kpi-label">Threats Today</div></div>
- <div class="kpi"><div class="kpi-value" id="kpi-blocked">0</div><div class="kpi-label">Blocked Intrusions</div></div>
- <div class="kpi"><div class="kpi-value" id="kpi-anomalies">0</div><div class="kpi-label">Network Anomalies</div></div>
- <div class="kpi"><div class="kpi-value" id="kpi-top">—</div><div class="kpi-label">Top Threat Origin</div></div>
- </div>
- <div class="map" id="mapContainer">
- <canvas id="globe"></canvas>
- <div class="map-overlay">
- <div class="legend">
+ </p> 
+ </div> 
+ </div> 
+ </div> 
+ </section> 
+ <section id="experience" class="section"> 
+ <h2>Professional Experience</h2> 
+ <div class="card"> 
+ <h3>SAP Security Administrator — Accenture(Mauritius)</h3> 
+ <ul> 
+ <li>Managed SAP user roles and authorizations in enterprise systems.</li> 
+ <li>Performed access reviews and compliance checks.</li> 
+ <li>Investigated authorization issues and security incidents.</li> 
+ <li>Maintained role‑based access control (RBAC).</li> 
+ </ul> 
+ </div><br> 
+ <div class="card"> 
+ <h3>QA Tester Intern — TotalEnergies(Mauritius)</h3> 
+ <ul> 
+ <li>Executed functional, regression and performance test cases with clear defect reporting.</li> 
+ <li>Partnered with developers to improve reliability and reduce escape defects.</li> 
+ <li>Documented reproducible steps, risks and mitigation notes.</li> 
+ <li>Contributed to secure SDLC practices and basic vulnerability validation.</li> 
+ </ul> 
+ </div> 
+ </section> 
+ <section id="skills" class="section"> 
+ <h2>Skills</h2> 
+ <div class="card"> 
+ <div class="skills-grid"> 
+ <!-- Networking --> 
+ <div class="skill" aria-label="Networking proficiency"> 
+ <div class="skill-head"> 
+ <span class="skill-name">Networking (Routing, Switching, VLAN, Subnetting)</span> 
+ <span class="skill-level">90%</span> 
+ </div> 
+ <div class="skill-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="90" aria-label="Networking level"> 
+ <div class="skill-fill" style="--level:90%;" data-animate="true"></div> 
+ </div> 
+ </div> 
+ <!-- Linux --> 
+ <div class="skill" aria-label="Linux proficiency"> 
+ <div class="skill-head"> 
+ <span class="skill-name">Linux System Administration</span> 
+ <span class="skill-level">85%</span> 
+ </div> 
+ <div class="skill-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="85" aria-label="Linux System Administration level"> 
+ <div class="skill-fill" style="--level:85%;" data-animate="true"></div> 
+ </div> 
+ </div> 
+ <!-- Scripting --> 
+ <div class="skill" aria-label="Scripting proficiency"> 
+ <div class="skill-head"> 
+ <span class="skill-name">Python & Bash Scripting</span> 
+ <span class="skill-level">80%</span> 
+ </div> 
+ <div class="skill-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="80" aria-label="Scripting level"> 
+ <div class="skill-fill" style="--level:80%;" data-animate="true"></div> 
+ </div> 
+ </div> 
+ <!-- Tools --> 
+ <div class="skill" aria-label="Security tools proficiency"> 
+ <div class="skill-head"> 
+ <span class="skill-name">Wireshark, Nmap, Burp Suite</span> 
+ <span class="skill-level">82%</span> 
+ </div> 
+ <div class="skill-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="82" aria-label="Security tools level"> 
+ <div class="skill-fill" style="--level:82%;" data-animate="true"></div> 
+ </div> 
+ </div> 
+ <!-- AD --> 
+ <div class="skill" aria-label="Active Directory proficiency"> 
+ <div class="skill-head"> 
+ <span class="skill-name">Active Directory Fundamentals</span> 
+ <span class="skill-level">75%</span> 
+ </div> 
+ <div class="skill-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="75" aria-label="Active Directory level"> 
+ <div class="skill-fill" style="--level:75%;" data-animate="true"></div> 
+ </div> 
+ </div> 
+ <!-- AWS --> 
+ <div class="skill" aria-label="AWS proficiency"> 
+ <div class="skill-head"> 
+ <span class="skill-name">AWS Cloud Foundations</span> 
+ <span class="skill-level">70%</span> 
+ </div> 
+ <div class="skill-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="70" aria-label="AWS level"> 
+ <div class="skill-fill" style="--level:70%;" data-animate="true"></div> 
+ </div> 
+ </div> 
+ </div> 
+ </div> 
+ </section> 
+ <section id="threatmap" class="section"> 
+ <h2>Global Cyber Threat Map</h2> 
+ <div class="kpis"> 
+ <div class="kpi"><div class="kpi-value" id="kpi-threats">0</div><div class="kpi-label">Threats Today</div></div> 
+ <div class="kpi"><div class="kpi-value" id="kpi-blocked">0</div><div class="kpi-label">Blocked Intrusions</div></div> 
+ <div class="kpi"><div class="kpi-value" id="kpi-anomalies">0</div><div class="kpi-label">Network Anomalies</div></div> 
+ <div class="kpi"><div class="kpi-value" id="kpi-top">—</div><div class="kpi-label">Top Threat Origin</div></div> 
+ </div> 
+ <div class="map" id="mapContainer"> 
+ <canvas id="globe"></canvas> 
+ <div class="map-overlay"> 
+ <div class="legend"> 
  <span class="dot dot-src"></span> Source 
  <span class="dot dot-dst"></span> Target 
  <span class="line-sample"></span> Attack Path 
- </div>
- </div>
- </div>
- <div class="alerts">
- <div class="alerts-header">Live Alerts</div>
- <div class="alerts-body" id="alerts"></div>
- </div>
- </section>
- <section id="contact" class="section">
- <h2>Contact</h2>
- <p>Email: homeshcahoolessur@gmail.com</p>
- <p>Phone: +61 489 311 067</p>
- <p>Location: Adelaide, Australia</p>
- <p>LinkedIn: <a href="https://www.linkedin.com/in/homesh-singh-cahoolessur-b4b5b4233" target="_blank" rel="noopener" style="color: hotpink;">linkedin.com/in/homesh-singh-cahoolessur-b4b5b4233</a></p>
- </section>
- <footer>
- <p>© 2026 Yash Cahoolessur — Cybersecurity & Networking Portfolio</p>
- </footer>
- <script>
- const rand=(min,max)=>Math.random()*(max-min)+min;
- const choice = arr => arr[Math.floor(Math.random()*arr.length)];
- const nowTs = () => new Date().toLocaleTimeString();
- const canvasTM = document.getElementById('globe');
- const g = canvasTM.getContext('2d', { alpha: true });
- function fitCanvasTM(){ const dpr = Math.min((window.devicePixelRatio||1),1.5); const cw=canvasTM.clientWidth, ch=canvasTM.clientHeight; canvasTM.width=Math.floor(cw*dpr); canvasTM.height=Math.floor(ch*dpr); g.setTransform(dpr,0,0,dpr,0,0); }
- fitCanvasTM();
- let tmRT; window.addEventListener('resize', ()=>{ clearTimeout(tmRT); tmRT=setTimeout(fitCanvasTM,120); });
- const landPaths=[]; (function buildRoughWorld(){ const rect=(lon1,lat1,lon2,lat2,steps=30)=>{ const pts=[]; for(let i=0;i<=steps;i++) pts.push([lon1+(lon2-lon1)*i/steps, lat1]); for(let i=0;i<=steps;i++) pts.push([lon2, lat1+(lat2-lat1)*i/steps]); for(let i=0;i<=steps;i++) pts.push([lon2-(lon2-lon1)*i/steps, lat2]); for(let i=0;i<=steps;i++) pts.push([lon1, lat2-(lat2-lat1)*i/steps]); return pts; }; landPaths.push(rect(-130,7,-60,55)); landPaths.push(rect(-80,-55,-35,12)); landPaths.push(rect(-10,35,40,72)); landPaths.push(rect(20,5,150,55)); landPaths.push(rect(110,-45,155,-10)); landPaths.push(rect(10,-35,45,5)); })();
- function project(lon,lat){ const w=canvasTM.clientWidth, h=canvasTM.clientHeight; const x=(lon+180)*(w/360); const latRad=lat*Math.PI/180; const mercN=Math.log(Math.tan((Math.PI/4)+(latRad/2))); const y=(h/2)-(w/(2*Math.PI))*mercN; return [x,y]; }
- const cities=[{name:'New York, US', lat:40.71, lon:-74.01, code:'US'},{name:'Los Angeles, US', lat:34.05, lon:-118.24, code:'US'},{name:'São Paulo, BR', lat:-23.55, lon:-46.63, code:'BR'},{name:'London, GB', lat:51.51, lon:-0.13, code:'GB'},{name:'Frankfurt, DE', lat:50.11, lon:8.68, code:'DE'},{name:'Moscow, RU', lat:55.75, lon:37.62, code:'RU'},{name:'Delhi, IN', lat:28.61, lon:77.21, code:'IN'},{name:'Singapore, SG', lat:1.35, lon:103.82, code:'SG'},{name:'Tokyo, JP', lat:35.68, lon:139.69, code:'JP'},{name:'Seoul, KR', lat:37.56, lon:126.97, code:'KR'},{name:'Sydney, AU', lat:-33.86, lon:151.21, code:'AU'},{name:'Melbourne, AU', lat:-37.81, lon:144.96, code:'AU'},{name:'Adelaide, AU', lat:-34.93, lon:138.60, code:'AU'},{name:'Beijing, CN', lat:39.90, lon:116.40, code:'CN'},{name:'Hong Kong, HK', lat:22.28, lon:114.16, code:'HK'},{name:'Johannesburg, ZA', lat:-26.20, lon:28.04, code:'ZA'},{name:'Tel Aviv, IL', lat:32.09, lon:34.78, code:'IL'},{name:'Dubai, AE', lat:25.20, lon:55.27, code:'AE'}];
- const attacks=[];
- function spawnAttack(){ const src=choice(cities); let dst=choice(cities); while(dst===src) dst=choice(cities); const t0=performance.now(); const duration=rand(1400,2600); const severity=choice(['low','medium','high']); const kind=choice(['SSH Brute Force','DDoS Probe','SQL Injection','Malware Beacon','RDP Attempt','Port Scan']); const proto=choice(['TCP','UDP','HTTPS','SSH','RDP']); const [x1,y1]=project(src.lon,src.lat); const [x2,y2]=project(dst.lon,dst.lat); const mx=(x1+x2)/2, my=(y1+y2)/2; const dx=x2-x1, dy=y2-y1; const len=Math.hypot(dx,dy)||1; const nx=-dy/len, ny=dx/len; const lift=Math.min(120, Math.max(40, len*0.18)); attacks.push({src,dst,x1,y1,x2,y2,cx:mx+nx*lift, cy:my+ny*lift, t0,duration,severity,kind,proto}); pushAlert({src,dst,severity, type:kind, proto}); bumpKpis(severity, src.code); }
- const isNarrow = () => window.matchMedia('(max-width: 420px)').matches; let spawnInterval=setInterval(spawnAttack, isNarrow()?1200:900); window.matchMedia('(max-width: 420px)').addEventListener('change', e=>{ clearInterval(spawnInterval); spawnInterval=setInterval(spawnAttack, e.matches?1200:900); });
- const alertsEl=document.getElementById('alerts');
- function pushAlert(a){ const row=document.createElement('div'); row.className='alert-item'; const sevClass=a.severity==='high'?'sev-high':(a.severity==='medium'?'sev-med':'sev-low'); row.innerHTML=`<span class="alert-ts">[${nowTs()}]</span> ${a.type} detected — ${a.proto} <span class="alert-sev ${sevClass}">${a.severity.toUpperCase()}</span><br><span style="color:#9adfe0">Source:</span> ${a.src.name} → <span style="color:#9adfe0">Target:</span> ${a.dst.name}`; alertsEl.prepend(row); while(alertsEl.children.length>60) alertsEl.removeChild(alertsEl.lastChild); }
- const kpiThreats=document.getElementById('kpi-threats'); const kpiBlocked=document.getElementById('kpi-blocked'); const kpiAnom=document.getElementById('kpi-anomalies'); const kpiTop=document.getElementById('kpi-top'); const countryTally={};
- function bumpKpis(sev,country){ kpiThreats.textContent=(+kpiThreats.textContent)+1; if(sev==='high'&&Math.random()>0.35) kpiBlocked.textContent=(+kpiBlocked.textContent)+1; if(Math.random()>0.84) kpiAnom.textContent=(+kpiAnom.textContent)+1; countryTally[country]=(countryTally[country]||0)+1; let top='—', max=-1; for(const [c,v] of Object.entries(countryTally)){ if(v>max){max=v; top=c;} } kpiTop.textContent=top; }
- function drawWorld(){ const w=canvasTM.clientWidth, h=canvasTM.clientHeight; g.save(); g.globalAlpha=0.05; g.strokeStyle='#00ffe5'; for(let x=0;x<w;x+=40){ g.beginPath(); g.moveTo(x,0); g.lineTo(x,h); g.stroke(); } for(let y=0;y<h;y+=40){ g.beginPath(); g.moveTo(0,y); g.lineTo(w,y); g.stroke(); } g.restore(); g.save(); g.strokeStyle='#00ffe577'; g.lineWidth=1; g.shadowColor='#00ffe5'; g.shadowBlur=6; landPaths.forEach(path=>{ g.beginPath(); path.forEach(([lon,lat],i)=>{ const [x,y]=project(lon,lat); if(i===0) g.moveTo(x,y); else g.lineTo(x,y); }); g.closePath(); g.stroke(); }); g.restore(); const t=performance.now(); cities.forEach(ct=>{ const [x,y]=project(ct.lon,ct.lat); g.beginPath(); const pulse=2+Math.sin(t/500 + x)*1.2; g.fillStyle='rgba(0,255,229,0.85)'; g.arc(x,y,pulse,0,Math.PI*2); g.fill(); }); }
- function drawAttacks(){ const now=performance.now(); for(let i=attacks.length-1;i>=0;i--){ const a=attacks[i]; const p=Math.min(1,(now-a.t0)/a.duration); g.save(); const grd=g.createLinearGradient(a.x1,a.y1,a.x2,a.y2); grd.addColorStop(0, a.severity==='high'?'#ff4d4d':(a.severity==='medium'?'#ffbf35':'#48f7ff')); grd.addColorStop(1,'#48f7ff'); g.strokeStyle=grd; g.lineWidth=2; g.shadowColor='#00ffe5'; g.shadowBlur=12; g.beginPath(); g.moveTo(a.x1,a.y1); g.quadraticCurveTo(a.cx,a.cy, a.x2,a.y2); g.stroke(); g.restore(); const qx=(1-p)*(1-p)*a.x1 + 2*(1-p)*p*a.cx + p*p*a.x2; const qy=(1-p)*(1-p)*a.y1 + 2*(1-p)*p*a.cy + p*p*a.y2; g.beginPath(); g.fillStyle='#48f7ff'; g.shadowColor='#48f7ff'; g.shadowBlur=18; g.arc(qx,qy,3.5,0,Math.PI*2); g.fill(); const alpha=0.4+0.6*Math.abs(Math.sin(now/200)); g.fillStyle=`rgba(255,77,77,${alpha})`; g.beginPath(); g.arc(a.x1,a.y1,3,0,Math.PI*2); g.fill(); g.fillStyle=`rgba(72,247,255,${alpha})`; g.beginPath(); g.arc(a.x2,a.y2,3,0,Math.PI*2); g.fill(); if(p>=1) attacks.splice(i,1); } }
- let run=true; function tick(){ if(!run){ requestAnimationFrame(tick); return; } g.fillStyle='rgba(0,0,0,0.08)'; g.fillRect(0,0,canvasTM.clientWidth,canvasTM.clientHeight); drawWorld(); drawAttacks(); requestAnimationFrame(tick); }
- tick(); document.addEventListener('visibilitychange', ()=>{ run=(document.visibilityState==='visible'); });
- (function boot(){ const mapEl=document.querySelector('.map'); if(!mapEl) return; const el=document.createElement('div'); el.style.cssText="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:#000b; color:#00ffe5; font-family:'Share Tech Mono', monospace; letter-spacing:1px; z-index:5;"; el.innerHTML = `<div id="bootLines"></div>`; mapEl.appendChild(el); const lines=['Initializing threat engine...','Loading intelligence sources...','Decrypting geospatial data...','Establishing secure upllink...','SYSTEM READY — Monitoring global activity.']; const bootDiv=el.querySelector('#bootLines'); let i=0; const iv=setInterval(()=>{ bootDiv.innerHTML += (i?'\n':'') + lines[i]; i++; if(i>=lines.length){ clearInterval(iv); setTimeout(()=>{ el.remove(); }, 800); } }, 300); })();
- </script>
- <div id="lbBackdrop" class="lightbox-backdrop" role="dialog" aria-modal="true" aria-label="Profile photo dialog">
- <div class="lightbox-img-wrap">
- <button id="lbClose" class="lightbox-close" aria-label="Close">✕</button>
- <img id="lbImg" src="IMG_7641.PNG" alt="Profile photo large" loading="lazy" decoding="async" />
- </div>
- </div>
- <script>
- (function(){ const toggle=document.getElementById('navToggle'); const nav=document.getElementById('siteNav'); function setOpen(open){ nav.classList.toggle('open', open); toggle.setAttribute('aria-expanded', String(open)); document.documentElement.style.overflow = open ? 'hidden' : ''; } toggle.addEventListener('click', ()=> setOpen(!nav.classList.contains('open'))); nav.addEventListener('click', e=>{ if(e.target.closest('a')) setOpen(false); }); document.addEventListener('keydown', e=>{ if(e.key==='Escape') setOpen(false); }); })();
- (function(){ const backdrop=document.getElementById('lbBackdrop'); const closeBtn=document.getElementById('lbClose'); const largeImg=document.getElementById('lbImg'); document.addEventListener('click', function(e){ const trigger=e.target.closest('.profile-zoom'); if(!trigger) return; e.preventDefault(); backdrop.classList.add('open'); closeBtn.focus(); }); closeBtn.addEventListener('click', ()=> backdrop.classList.remove('open')); backdrop.addEventListener('click', (e)=>{ if(e.target===backdrop) backdrop.classList.remove('open'); }); document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') backdrop.classList.remove('open'); }); })();
- 
- // Animate skill bars on load
- (function(){
-   const fills = document.querySelectorAll('.skill-fill[data-animate="true"]');
-   requestAnimationFrame(() => {
-     fills.forEach(el => el.classList.add('go'));
-   });
- })();
- </script>
-</body>
+ </div> 
+ </div> 
+ </div> 
+ <div class="alerts"> 
+ <div class="alerts-header">Live Alerts</div> 
+ <div class="alerts-body" id="alerts"></div> 
+ </div> 
+ </section> 
+ <section id="contact" class="section"> 
+ <h2>Contact</h2> 
+ <p>Email: homeshcahoolessur@gmail.com</p> 
+ <p>Phone: +61 489 311 067</p> 
+ <p>Location: Adelaide, Australia</p> 
+ <p>LinkedIn: <a href="https://www.linkedin.com/in/homesh-singh-cahoolessur-b4b5b4233" target="_blank" rel="noopener" style="color: hotpink;">linkedin.com/in/homesh-singh-cahoolessur-b4b5b4233</a></p> 
+ </section> 
+ <footer> 
+ <p>© 2026 Yash Cahoolessur — Cybersecurity & Networking Portfolio</p> 
+ </footer> 
+ <script> 
+ const rand=(min,max)=>Math.random()*(max-min)+min; 
+ const choice = arr => arr[Math.floor(Math.random()*arr.length)]; 
+ const nowTs = () => new Date().toLocaleTimeString(); 
+ const canvasTM = document.getElementById('globe'); 
+ const g = canvasTM.getContext('2d', { alpha: true }); 
+ function fitCanvasTM(){ const dpr = Math.min((window.devicePixelRatio||1),1.5); const cw=canvasTM.clientWidth, ch=canvasTM.clientHeight; canvasTM.width=Math.floor(cw*dpr); canvasTM.height=Math.floor(ch*dpr); g.setTransform(dpr,0,0,dpr,0,0); } 
+ fitCanvasTM(); 
+ let tmRT; window.addEventListener('resize', ()=>{ clearTimeout(tmRT); tmRT=setTimeout(fitCanvasTM,120); }); 
+ const landPaths=[]; (function buildRoughWorld(){ const rect=(lon1,lat1,lon2,lat2,steps=30)=>{ const pts=[]; for(let i=0;i<=steps;i++) pts.push([lon1+(lon2-lon1)*i/steps, lat1]); for(let i=0;i<=steps;i++) pts.push([lon2, lat1+(lat2-lat1)*i/steps]); for(let i=0;i<=steps;i++) pts.push([lon2-(lon2-lon1)*i/steps, lat2]); for(let i=0;i<=steps;i++) pts.push([lon1, lat2-(lat2-lat1)*i/steps]); return pts; }; landPaths.push(rect(-130,7,-60,55)); landPaths.push(rect(-80,-55,-35,12)); landPaths.push(rect(-10,35,40,72)); landPaths.push(rect(20,5,150,55)); landPaths.push(rect(110,-45,155,-10)); landPaths.push(rect(10,-35,45,5)); })(); 
+ function project(lon,lat){ const w=canvasTM.clientWidth, h=canvasTM.clientHeight; const x=(lon+180)*(w/360); const latRad=lat*Math.PI/180; const mercN=Math.log(Math.tan((Math.PI/4)+(latRad/2))); const y=(h/2)-(w/(2*Math.PI))*mercN; return [x,y]; } 
+ const cities=[{name:'New York, US', lat:40.71, lon:-74.01, code:'US'},{name:'Los Angeles, US', lat:34.05, lon:-118.24, code:'US'},{name:'São Paulo, BR', lat:-23.55, lon:-46.63, code:'BR'},{name:'London, GB', lat:51.51, lon:-0.13, code:'GB'},{name:'Frankfurt, DE', lat:50.11, lon:8.68, code:'DE'},{name:'Moscow, RU', lat:55.75, lon:37.62, code:'RU'},{name:'Delhi, IN', lat:28.61, lon:77.21, code:'IN'},{name:'Singapore, SG', lat:1.35, lon:103.82, code:'SG'},{name:'Tokyo, JP', lat:35.68, lon:139.69, code:'JP'},{name:'Seoul, KR', lat:37.56, lon:126.97, code:'KR'},{name:'Sydney, AU', lat:-33.86, lon:151.21, code:'AU'},{name:'Melbourne, AU', lat:-37.81, lon:144.96, code:'AU'},{name:'Adelaide, AU', lat:-34.93, lon:138.60, code:'AU'},{name:'Beijing, CN', lat:39.90, lon:116.40, code:'CN'},{name:'Hong Kong, HK', lat:22.28, lon:114.16, code:'HK'},{name:'Johannesburg, ZA', lat:-26.20, lon:28.04, code:'ZA'},{name:'Tel Aviv, IL', lat:32.09, lon:34.78, code:'IL'},{name:'Dubai, AE', lat:25.20, lon:55.27, code:'AE'}]; 
+ const attacks=[]; 
+ function spawnAttack(){ const src=choice(cities); let dst=choice(cities); while(dst===src) dst=choice(cities); const t0=performance.now(); const duration=rand(1400,2600); const severity=choice(['low','medium','high']); const kind=choice(['SSH Brute Force','DDoS Probe','SQL Injection','Malware Beacon','RDP Attempt','Port Scan']); const proto=choice(['TCP','UDP','HTTPS','SSH','RDP']); const [x1,y1]=project(src.lon,src.lat); const [x2,y2]=project(dst.lon,dst.lat); const mx=(x1+x2)/2, my=(y1+y2)/2; const dx=x2-x1, dy=y2-y1; const len=Math.hypot(dx,dy)||1; const nx=-dy/len, ny=dx/len; const lift=Math.min(120, Math.max(40, len*0.18)); attacks.push({src,dst,x1,y1,x2,y2,cx:mx+nx*lift, cy:my+ny*lift, t0,duration,severity,kind,proto}); pushAlert({src,dst,severity, type:kind, proto}); bumpKpis(severity, src.code); } 
+ const isNarrow = () => window.matchMedia('(max-width: 420px)').matches; let spawnInterval=setInterval(spawnAttack, isNarrow()?1200:900); window.matchMedia('(max-width: 420px)').addEventListener('change', e=>{ clearInterval(spawnInterval); spawnInterval=setInterval(spawnAttack, e.matches?1200:900); }); 
+ const alertsEl=document.getElementById('alerts'); 
+ function pushAlert(a){ const row=document.createElement('div'); row.className='alert-item'; const sevClass=a.severity==='high'?'sev-high':(a.severity==='medium'?'sev-med':'sev-low'); row.innerHTML=`<span class="alert-ts">[${nowTs()}]</span> ${a.type} detected — ${a.proto} <span class="alert-sev ${sevClass}">${a.severity.toUpperCase()}</span><br><span style="color:#9adfe0">Source:</span> ${a.src.name} → <span style="color:#9adfe0">Target:</span> ${a.dst.name}`; alertsEl.prepend(row); while(alertsEl.children.length>60) alertsEl.removeChild(alertsEl.lastChild); } 
+ const kpiThreats=document.getElementById('kpi-threats'); const kpiBlocked=document.getElementById('kpi-blocked'); const kpiAnom=document.getElementById('kpi-anomalies'); const kpiTop=document.getElementById('kpi-top'); const countryTally={}; 
+ function bumpKpis(sev,country){ kpiThreats.textContent=(+kpiThreats.textContent)+1; if(sev==='high'&&Math.random()>0.35) kpiBlocked.textContent=(+kpiBlocked.textContent)+1; if(Math.random()>0.84) kpiAnom.textContent=(+kpiAnom.textContent)+1; countryTally[country]=(countryTally[country]||0)+1; let top='—', max=-1; for(const [c,v] of Object.entries(countryTally)){ if(v>max){max=v; top=c;} } kpiTop.textContent=top; } 
+ function drawWorld(){ const w=canvasTM.clientWidth, h=canvasTM.clientHeight; g.save(); g.globalAlpha=0.05; g.strokeStyle='#00ffe5'; for(let x=0;x<w;x+=40){ g.beginPath(); g.moveTo(x,0); g.lineTo(x,h); g.stroke(); } for(let y=0;y<h;y+=40){ g.beginPath(); g.moveTo(0,y); g.lineTo(w,y); g.stroke(); } g.restore(); g.save(); g.strokeStyle='#00ffe577'; g.lineWidth=1; g.shadowColor='#00ffe5'; g.shadowBlur=6; landPaths.forEach(path=>{ g.beginPath(); path.forEach(([lon,lat],i)=>{ const [x,y]=project(lon,lat); if(i===0) g.moveTo(x,y); else g.lineTo(x,y); }); g.closePath(); g.stroke(); }); g.restore(); const t=performance.now(); cities.forEach(ct=>{ const [x,y]=project(ct.lon,ct.lat); g.beginPath(); const pulse=2+Math.sin(t/500 + x)*1.2; g.fillStyle='rgba(0,255,229,0.85)'; g.arc(x,y,pulse,0,Math.PI*2); g.fill(); }); } 
+ function drawAttacks(){ const now=performance.now(); for(let i=attacks.length-1;i>=0;i--){ const a=attacks[i]; const p=Math.min(1,(now-a.t0)/a.duration); g.save(); const grd=g.createLinearGradient(a.x1,a.y1,a.x2,a.y2); grd.addColorStop(0, a.severity==='high'?'#ff4d4d':(a.severity==='medium'?'#ffbf35':'#48f7ff')); grd.addColorStop(1,'#48f7ff'); g.strokeStyle=grd; g.lineWidth=2; g.shadowColor='#00ffe5'; g.shadowBlur=12; g.beginPath(); g.moveTo(a.x1,a.y1); g.quadraticCurveTo(a.cx,a.cy, a.x2,a.y2); g.stroke(); g.restore(); const qx=(1-p)*(1-p)*a.x1 + 2*(1-p)*p*a.cx + p*p*a.x2; const qy=(1-p)*(1-p)*a.y1 + 2*(1-p)*p*a.cy + p*p*a.y2; g.beginPath(); g.fillStyle='#48f7ff'; g.shadowColor='#48f7ff'; g.shadowBlur=18; g.arc(qx,qy,3.5,0,Math.PI*2); g.fill(); const alpha=0.4+0.6*Math.abs(Math.sin(now/200)); g.fillStyle=`rgba(255,77,77,${alpha})`; g.beginPath(); g.arc(a.x1,a.y1,3,0,Math.PI*2); g.fill(); g.fillStyle=`rgba(72,247,255,${alpha})`; g.beginPath(); g.arc(a.x2,a.y2,3,0,Math.PI*2); g.fill(); if(p>=1) attacks.splice(i,1); } } 
+ let run=true; function tick(){ if(!run){ requestAnimationFrame(tick); return; } g.fillStyle='rgba(0,0,0,0.08)'; g.fillRect(0,0,canvasTM.clientWidth,canvasTM.clientHeight); drawWorld(); drawAttacks(); requestAnimationFrame(tick); } 
+ tick(); document.addEventListener('visibilitychange', ()=>{ run=(document.visibilityState==='visible'); }); 
+ (function boot(){ const mapEl=document.querySelector('.map'); if(!mapEl) return; const el=document.createElement('div'); el.style.cssText="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:#000b; color:#00ffe5; font-family:'Share Tech Mono', monospace; letter-spacing:1px; z-index:5;"; el.innerHTML = `<div id="bootLines"></div>`; mapEl.appendChild(el); const lines=['Initializing threat engine...','Loading intelligence sources...','Decrypting geospatial data...','Establishing secure upllink...','SYSTEM READY — Monitoring global activity.']; const bootDiv=el.querySelector('#bootLines'); let i=0; const iv=setInterval(()=>{ bootDiv.innerHTML += (i?'\n':'') + lines[i]; i++; if(i>=lines.length){ clearInterval(iv); setTimeout(()=>{ el.remove(); }, 800); } }, 300); })(); 
+ </script> 
+ <div id="lbBackdrop" class="lightbox-backdrop" role="dialog" aria-modal="true" aria-label="Profile photo dialog"> 
+ <div class="lightbox-img-wrap"> 
+ <button id="lbClose" class="lightbox-close" aria-label="Close">✕</button> 
+ <img id="lbImg" src="IMG_7641.PNG" alt="Profile photo large" loading="lazy" decoding="async" /> 
+ </div> 
+ </div> 
+ <script> 
+ (function(){ const toggle=document.getElementById('navToggle'); const nav=document.getElementById('siteNav'); function setOpen(open){ nav.classList.toggle('open', open); toggle.setAttribute('aria-expanded', String(open)); document.documentElement.style.overflow = open ? 'hidden' : ''; } toggle.addEventListener('click', ()=> setOpen(!nav.classList.contains('open'))); nav.addEventListener('click', e=>{ if(e.target.closest('a')) setOpen(false); }); document.addEventListener('keydown', e=>{ if(e.key==='Escape') setOpen(false); }); })(); 
+ (function(){ const backdrop=document.getElementById('lbBackdrop'); const closeBtn=document.getElementById('lbClose'); const largeImg=document.getElementById('lbImg'); document.addEventListener('click', function(e){ const trigger=e.target.closest('.profile-zoom'); if(!trigger) return; e.preventDefault(); backdrop.classList.add('open'); closeBtn.focus(); }); closeBtn.addEventListener('click', ()=> backdrop.classList.remove('open')); backdrop.addEventListener('click', (e)=>{ if(e.target===backdrop) backdrop.classList.remove('open'); }); document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') backdrop.classList.remove('open'); }); })(); 
+ // Animate skill bars on load 
+ (function(){ 
+ const fills = document.querySelectorAll('.skill-fill[data-animate="true"]'); 
+ requestAnimationFrame(() => { 
+ fills.forEach(el => el.classList.add('go')); 
+ }); 
+ })(); 
+ </script> 
+</body> 
 </html>
