@@ -6,109 +6,158 @@
   <title>Yash Cahoolessur — Cybersecurity & Networking Portfolio</title>
   <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
   <style>
-    /* Neon gradient color cycle */
-    @keyframes neonCycle { 0% { color:#00ffe5; text-shadow:0 0 12px #00ffe5; } 33% { color:#7b5bff; text-shadow:0 0 12px #7b5bff; } 66% { color:#39ff14; text-shadow:0 0 12px #39ff14; } 100% { color:#00ffe5; text-shadow:0 0 12px #00ffe5; } }
-    h1, h2 { animation: neonCycle 6s infinite linear; }
+  /* Neon gradient color cycle */
+  @keyframes neonCycle { 
+    0% { color:#00ffe5; text-shadow:0 0 12px #00ffe5; } 
+    33% { color:#7b5bff; text-shadow:0 0 12px #7b5bff; } 
+    66% { color:#39ff14; text-shadow:0 0 12px #39ff14; } 
+    100% { color:#00ffe5; text-shadow:0 0 12px #00ffe5; } 
+  }
+  h1, h2 { animation: neonCycle 6s infinite linear; }
+  body { margin:0; font-family:'Share Tech Mono', monospace; background:#000; color:#e0e0e0; overflow-x:hidden; }
 
-    body { margin:0; font-family:'Share Tech Mono', monospace; background:#000; color:#e0e0e0; overflow-x:hidden; }
-    /* Glowing neon grid background */
-    body::before { content:""; position:fixed; top:0; left:0; width:100%; height:100%; background:radial-gradient(circle, rgba(0,255,255,0.08) 0%, rgba(0,0,0,1) 70%), repeating-linear-gradient(0deg, transparent 0px, transparent 48px, rgba(0,255,255,0.08) 49px), repeating-linear-gradient(90deg, transparent 0px, transparent 48px, rgba(0,255,255,0.08) 49px); z-index:-1; }
+  /* Glowing neon grid background */
+  body::before {
+    content:""; position:fixed; top:0; left:0; width:100%; height:100%;
+    background:radial-gradient(circle, rgba(0,255,255,0.08) 0%, rgba(0,0,0,1) 70%),
+               repeating-linear-gradient(0deg, transparent 0px, transparent 48px, rgba(0,255,255,0.08) 49px),
+               repeating-linear-gradient(90deg, transparent 0px, transparent 48px, rgba(0,255,255,0.08) 49px);
+    z-index:-1;
+  }
 
-    header { background:#050505cc; padding:25px; text-align:center; border-bottom:1px solid #00ffe5; box-shadow:0 0 15px #00ffe5; animation:glow 2.5s infinite alternate; }
-    @keyframes glow { from{box-shadow:0 0 5px #00ffe5;} to{box-shadow:0 0 25px #00ffe5;} }
-    header h1 { margin:0; font-size:2.6rem; color:#00ffe5; text-shadow:0 0 10px #00ffe5; }
-    nav a { color:#5af5ff; margin:0 15px; text-decoration:none; font-weight:bold; transition:0.3s; }
-    nav a:hover { text-shadow:0 0 10px #00ffe5; color:#fff; }
+  header { background:#050505cc; padding:25px; text-align:center; border-bottom:1px solid #00ffe5; box-shadow:0 0 15px #00ffe5; animation:glow 2.5s infinite alternate; }
+  @keyframes glow { from{box-shadow:0 0 5px #00ffe5;} to{box-shadow:0 0 25px #00ffe5;} }
+  header h1 { margin:0; font-size:2.6rem; color:#00ffe5; text-shadow:0 0 10px #00ffe5; }
+  nav a { color:#5af5ff; margin:0 15px; text-decoration:none; font-weight:bold; transition:0.3s; }
+  nav a:hover { text-shadow:0 0 10px #00ffe5; color:#fff; }
 
-    .hero { padding:80px 20px; text-align:center; animation:fadeIn 2.5s ease; }
-    @keyframes fadeIn { from{opacity:0; transform:translateY(20px);} to{opacity:1; transform:translateY(0);} }
-    .hero h2 { font-size:2.3rem; color:#00ffe5; text-shadow:0 0 10px #00ffe5; }
+  .hero { padding:80px 20px; text-align:center; animation:fadeIn 2.5s ease; }
+  @keyframes fadeIn { from{opacity:0; transform:translateY(20px);} to{opacity:1; transform:translateY(0);} }
+  .hero h2 { font-size:2.3rem; color:#00ffe5; text-shadow:0 0 10px #00ffe5; }
 
-    .section { padding:40px 20px; max-width:1100px; margin:auto; }
+  .section { padding:40px 20px; max-width:1100px; margin:auto; }
 
-    .card { background:#0a0a0a; padding:25px; border-radius:15px; border:1px solid #0ff5; box-shadow:0 0 8px #0ff5; transition:0.3s; position:relative; overflow:hidden; backdrop-filter:blur(4px); }
-    .card::before { content:""; position:absolute; top:0; left:-100%; width:100%; height:100%; background:linear-gradient(120deg, transparent, rgba(0,255,255,0.3), transparent); transition:0.5s; }
-    .card:hover::before { left:100%; }
-    .card:hover { transform:translateY(-8px); box-shadow:0 0 25px #00ffe5, 0 0 35px #00bfff inset; border-color:#00ffe5; }
-    .card h3 { margin-top:0; color:#00ffe5; text-shadow:0 0 8px #00ffe5; }
+  .card { background:#0a0a0a; padding:25px; border-radius:15px; border:1px solid #0ff5; box-shadow:0 0 8px #0ff5; transition:0.3s; position:relative; overflow:hidden; backdrop-filter:blur(4px); }
+  .card::before { content:""; position:absolute; top:0; left:-100%; width:100%; height:100%;
+    background:linear-gradient(120deg, transparent, rgba(0,255,255,0.3), transparent); transition:0.5s; }
+  .card:hover::before { left:100%; }
+  .card:hover { transform:translateY(-8px); box-shadow:0 0 25px #00ffe5, 0 0 35px #00bfff inset; border-color:#00ffe5; }
+  .card h3 { margin-top:0; color:#00ffe5; text-shadow:0 0 8px #00ffe5; }
 
-    footer { text-align:center; padding:20px; margin-top:40px; border-top:1px solid #00ffe5; background:#050505cc; }
+  footer { text-align:center; padding:20px; margin-top:40px; border-top:1px solid #00ffe5; background:#050505cc; }
 
-    /* Terminal intro box */
-    .terminal { max-width:700px; margin:40px auto; background:#000; border:2px solid #00ffe5; padding:20px; color:#00ffe5; border-radius:10px; box-shadow:0 0 15px #00ffe5; animation:fadeIn 2s ease; }
-    @keyframes typing { from{width:0;} to{width:100%;} }
-    @keyframes blink { 0%{border-right-color:#00ffe5;} 50%{border-right-color:transparent;} 100%{border-right-color:#00ffe5;} }
-    .terminal-text { overflow:hidden; white-space:nowrap; width:0; border-right:2px solid #00ffe5; animation:typing 4s steps(40,end) forwards, blink .7s infinite; }
+  /* Terminal intro box */
+  .terminal { max-width:700px; margin:40px auto; background:#000; border:2px solid #00ffe5; padding:20px; color:#00ffe5; border-radius:10px; box-shadow:0 0 15px #00ffe5; animation:fadeIn 2s ease; }
+  @keyframes typing { from{width:0;} to{width:100%;} }
+  @keyframes blink { 0%{border-right-color:#00ffe5;} 50%{border-right-color:transparent;} 100%{border-right-color:#00ffe5;} }
+  .terminal-text { overflow:hidden; white-space:nowrap; width:0; border-right:2px solid #00ffe5; animation:typing 4s steps(40,end) forwards, blink .7s infinite; }
 
-    /* Threat Map / Dashboard */
-    .kpis{ display:grid; grid-template-columns: repeat(4, minmax(150px,1fr)); gap:14px; margin-bottom:14px; }
-    .kpi{ background:#070707; border:1px solid #00ffe533; border-radius:10px; padding:12px; box-shadow:0 0 12px #00ffe511 inset; text-align:center; }
-    .kpi-value{ font-size:1.6rem; color:#00ffe5; text-shadow:0 0 10px #00ffe5; }
-    .kpi-label{ font-size:.85rem; color:#9adfe0 }
+  /* Threat Map / Dashboard */
+  .kpis{ display:grid; grid-template-columns: repeat(4, minmax(150px,1fr)); gap:14px; margin-bottom:14px; }
+  .kpi{ background:#070707; border:1px solid #00ffe533; border-radius:10px; padding:12px; box-shadow:0 0 12px #00ffe511 inset; text-align:center; }
+  .kpi-value{ font-size:1.6rem; color:#00ffe5; text-shadow:0 0 10px #00ffe5; }
+  .kpi-label{ font-size:.85rem; color:#9adfe0 }
+  .map{ position:relative; height:420px; background:#030303; border:1px solid #00ffe5; border-radius:10px; overflow:hidden; box-shadow:0 0 20px #00ffe533 inset; }
+  #globe{ width:100%; height:100%; display:block; }
+  .map-overlay{ position:absolute; inset:0; pointer-events:none; display:flex; justify-content:flex-end; align-items:flex-end; padding:8px; }
+  .legend{ background:#000a; border:1px solid #00ffe533; padding:6px 10px; border-radius:8px; font-size:.8rem; color:#9adfe0; }
+  .dot{ display:inline-block; width:8px; height:8px; border-radius:50%; margin:0 6px 0 10px }
+  .dot-src{ background:#ff4d4d; box-shadow:0 0 8px #ff4d4d }
+  .dot-dst{ background:#48f7ff; box-shadow:0 0 8px #48f7ff }
+  .line-sample{ display:inline-block; width:40px; height:2px; background:linear-gradient(90deg,#ff4d4d, #48f7ff); margin-left:10px; box-shadow:0 0 8px #00ffe5; }
+  .alerts{ margin-top:14px; background:#070707; border:1px solid #00ffe533; border-radius:10px; overflow:hidden; }
+  .alerts-header{ background:#031314; color:#00ffe5; padding:10px 12px; border-bottom:1px solid #00ffe533; font-weight:bold; letter-spacing:.5px; }
+  .alerts-body{ max-height:180px; overflow:auto; font-family:'Share Tech Mono', monospace; }
+  .alert-item{ padding:8px 12px; border-bottom:1px dashed #0d3c40; }
+  .alert-item:last-child{ border-bottom:none }
 
-    .map{ position:relative; height:420px; background:#030303; border:1px solid #00ffe5; border-radius:10px; overflow:hidden; box-shadow:0 0 20px #00ffe533 inset; }
-    #globe{ width:100%; height:100%; display:block; }
-    .map-overlay{ position:absolute; inset:0; pointer-events:none; display:flex; justify-content:flex-end; align-items:flex-end; padding:8px; }
-    .legend{ background:#000a; border:1px solid #00ffe533; padding:6px 10px; border-radius:8px; font-size:.8rem; color:#9adfe0; }
-    .dot{ display:inline-block; width:8px; height:8px; border-radius:50%; margin:0 6px 0 10px }
-    .dot-src{ background:#ff4d4d; box-shadow:0 0 8px #ff4d4d }
-    .dot-dst{ background:#48f7ff; box-shadow:0 0 8px #48f7ff }
-    .line-sample{ display:inline-block; width:40px; height:2px; background:linear-gradient(90deg,#ff4d4d, #48f7ff); margin-left:10px; box-shadow:0 0 8px #00ffe5; }
+  /* Profile photo + About layout */
+  .about-wrap { display:flex; gap:24px; align-items:center; flex-wrap:wrap; }
+  .profile { width:140px; height:140px; border-radius:50%; overflow:hidden; position:relative; flex:0 0 auto; }
+  .profile::before { 
+    content:''; position:absolute; inset:-4px; border-radius:50%;
+    background:conic-gradient(#00ffe5, #7b5bff, #39ff14, #00ffe5);
+    filter:blur(6px); z-index:0;
+  }
+  .profile img { position:relative; z-index:1; width:100%; height:100%; object-fit:cover; display:block; }
+  .about-text { flex:1 1 280px; min-width:260px; }
 
-    .alerts{ margin-top:14px; background:#070707; border:1px solid #00ffe533; border-radius:10px; overflow:hidden; }
-    .alerts-header{ background:#031314; color:#00ffe5; padding:10px 12px; border-bottom:1px solid #00ffe533; font-weight:bold; letter-spacing:.5px; }
-    .alerts-body{ max-height:180px; overflow:auto; font-family:'Share Tech Mono', monospace; }
-    .alert-item{ padding:8px 12px; border-bottom:1px dashed #0d3c40; }
-    .alert-item:last-child{ border-bottom:none }
-    .alert-ts{ color:#66f7ff }
-    .alert-sev{ padding:2px 6px; border-radius:6px; margin-left:6px; font-weight:bold; font-size:.75rem }
-    .sev-high{ background:#ff4d4d22; color:#ff8080; border:1px solid #ff4d4d55 }
-    .sev-med{ background:#ffbf3522; color:#ffd18a; border:1px solid #ffbf3555 }
-    .sev-low{ background:#73ff7a22; color:#9effa4; border:1px solid #73ff7a55 }
+  /* Click-to-zoom (lightbox) */
+  .profile-zoom { all: unset; cursor: zoom-in; display: block; line-height: 0; border-radius: 50%; }
+  .profile-zoom:focus-visible { outline: 2px solid #00ffe5; outline-offset: 2px; }
 
-    /* Responsive tweaks */
-    @media (max-width:700px){ .kpis{ grid-template-columns: repeat(2, minmax(140px,1fr)); } .map{ height:360px; } }
+  .lightbox-backdrop {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.88);
+    display: none; align-items: center; justify-content: center;
+    z-index: 9999; padding: 24px;
+  }
+  .lightbox-backdrop.open { display: flex; }
+
+  .lightbox-img-wrap {
+    position: relative; max-width: min(92vw, 780px); max-height: 92vh;
+    border-radius: 14px; overflow: hidden; background: #000;
+    border: 1px solid #00ffe544; box-shadow: 0 0 28px #00ffe588;
+  }
+  .lightbox-img-wrap img { display: block; width: 100%; height: auto; }
+
+  .lightbox-close {
+    position: absolute; top: 8px; right: 10px; cursor: pointer;
+    background: #000000aa; color: #00ffe5; border: 1px solid #00ffe544;
+    border-radius: 8px; padding: 6px 10px; font-family: inherit;
+  }
+  .lightbox-close:hover { background: #001a1aaa; }
+
+  /* Responsive tweaks */
+  @media (max-width:700px){
+    .kpis{ grid-template-columns: repeat(2, minmax(140px,1fr)); }
+    .map{ height:360px; }
+    .about-wrap { flex-direction: column; align-items: center; text-align: center; }
+    .about-text { min-width: auto; }
+    .profile { margin-bottom: 14px; }
+  }
   </style>
 
   <script>
-    /* Binary rain animation */
-    document.addEventListener('DOMContentLoaded', () => {
-      const canvas = document.createElement('canvas');
-      canvas.style.position = 'fixed';
-      canvas.style.top = '0';
-      canvas.style.left = '0';
-      canvas.style.width = '100%';
-      canvas.style.height = '100%';
-      canvas.style.zIndex = '-2';
-      document.body.appendChild(canvas);
-      const ctx = canvas.getContext('2d');
-      function size(){ canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
-      size(); window.addEventListener('resize', size);
-      const letters = '01';
-      const fontSize = 16;
-      let columns = Math.floor(canvas.width / fontSize);
-      let drops = Array(columns).fill(1);
-      function draw() {
-        ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = '#00ffe5';
-        ctx.font = fontSize + 'px monospace';
-        for (let i = 0; i < drops.length; i++) {
-          const text = letters[Math.floor(Math.random() * letters.length)];
-          ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-          if (drops[i] * fontSize > canvas.height && Math.random() > 0.95) { drops[i] = 0; }
-          drops[i]++;
-        }
+  /* Binary rain animation */
+  document.addEventListener('DOMContentLoaded', () => {
+    const canvas = document.createElement('canvas');
+    canvas.style.position = 'fixed';
+    canvas.style.top = '0';
+    canvas.style.left = '0';
+    canvas.style.width = '100%';
+    canvas.style.height = '100%';
+    canvas.style.zIndex = '-2';
+    document.body.appendChild(canvas);
+    const ctx = canvas.getContext('2d');
+    function size(){ canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+    size(); window.addEventListener('resize', size);
+    const letters = '01';
+    const fontSize = 16;
+    let columns = Math.floor(canvas.width / fontSize);
+    let drops = Array(columns).fill(1);
+    function draw() {
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = '#00ffe5';
+      ctx.font = fontSize + 'px monospace';
+      for (let i = 0; i < drops.length; i++) {
+        const text = letters[Math.floor(Math.random() * letters.length)];
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.95) { drops[i] = 0; }
+        drops[i]++;
       }
-      setInterval(draw, 50);
-    });
+    }
+    setInterval(draw, 50);
+  });
   </script>
 </head>
 <body>
   <div class="terminal"><div class="terminal-text">Initializing Cyber Portfolio... Access Granted ✔</div></div>
+
   <header>
     <h1>Yash Cahoolessur — Cybersecurity & Networking Portfolio</h1>
     <nav>
+      <a href="#about">About</a>
       <a href="#experience">Experience</a>
       <a href="#skills">Skills</a>
       <a href="#threatmap">Threat Map</a>
@@ -118,10 +167,32 @@
 
   <section class="hero">
     <h2>Welcome, Cyber Explorer</h2>
-    <p>Explore my experience and SOC‑style threat monitoring demo.</p>
+    <p></p>
   </section>
 
-  <!-- Experience Section (added) -->
+  <!-- About Me Section -->
+  <section id="about" class="section">
+    <h2>About Me</h2>
+    <div class="card">
+      <div class="about-wrap">
+        <div class="profile">
+          <button class="profile-zoom" aria-label="Open larger profile photo">
+            <img src="IMG_7641.PNG" alt="Profile photo" />
+          </button>
+        </div>
+        <div class="about-text">
+          <p>
+            Cybersecurity-focused IT professional with enterprise experience in SAP security administration
+            and quality assurance. Currently pursuing a Master's in IT (Network & Cybersecurity) and actively
+            seeking SOC analyst and cyber defence opportunities. Passionate about threat detection, incident
+            response, and strengthening security posture through continuous learning and hands-on practice.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience Section -->
   <section id="experience" class="section">
     <h2>Professional Experience</h2>
     <div class="card">
@@ -157,7 +228,7 @@
     </ul>
   </section>
 
-  <!-- Threat Map Section (added) -->
+  <!-- Threat Map Section -->
   <section id="threatmap" class="section">
     <h2>Global Cyber Threat Map</h2>
     <div class="kpis">
@@ -166,18 +237,16 @@
       <div class="kpi"><div class="kpi-value" id="kpi-anomalies">0</div><div class="kpi-label">Network Anomalies</div></div>
       <div class="kpi"><div class="kpi-value" id="kpi-top">—</div><div class="kpi-label">Top Threat Origin</div></div>
     </div>
-
     <div class="map">
       <canvas id="globe"></canvas>
       <div class="map-overlay">
         <div class="legend">
-          <span class="dot dot-src"></span> Source
-          <span class="dot dot-dst"></span> Target
-          <span class="line-sample"></span> Attack Path
+          <span class="dot dot-src"></span> Source 
+          <span class="dot dot-dst"></span> Target 
+          <span class="line-sample"></span> Attack Path 
         </div>
       </div>
     </div>
-
     <div class="alerts">
       <div class="alerts-header">Live Alerts</div>
       <div class="alerts-body" id="alerts"></div>
@@ -199,198 +268,239 @@
 
   <!-- Threat Map Engine (No external libs) -->
   <script>
-    // Utilities
-    const rand = (min,max)=>Math.random()*(max-min)+min;
-    const choice = arr => arr[Math.floor(Math.random()*arr.length)];
-    const nowTs = () => new Date().toLocaleTimeString();
+  // Utilities
+  const rand = (min,max)=>Math.random()*(max-min)+min;
+  const choice = arr => arr[Math.floor(Math.random()*arr.length)];
+  const nowTs = () => new Date().toLocaleTimeString();
 
-    // Canvas setup
-    const canvasTM = document.getElementById('globe');
-    const g = canvasTM.getContext('2d', { alpha: true });
-    function fitCanvasTM() {
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
-      canvasTM.width = canvasTM.clientWidth * dpr;
-      canvasTM.height = canvasTM.clientHeight * dpr;
-      g.setTransform(dpr,0,0,dpr,0,0);
-    }
-    fitCanvasTM();
-    window.addEventListener('resize', fitCanvasTM);
+  // Canvas setup
+  const canvasTM = document.getElementById('globe');
+  const g = canvasTM.getContext('2d', { alpha: true });
+  function fitCanvasTM() {
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    canvasTM.width = canvasTM.clientWidth * dpr;
+    canvasTM.height = canvasTM.clientHeight * dpr;
+    g.setTransform(dpr,0,0,dpr,0,0);
+  }
+  fitCanvasTM();
+  window.addEventListener('resize', fitCanvasTM);
 
-    // Stylized world outline
-    const landPaths = [];
-    (function buildRoughWorld(){
-      const rect = (lon1,lat1,lon2,lat2,steps=30)=>{
-        const pts=[];
-        for(let i=0;i<=steps;i++) pts.push([lon1+(lon2-lon1)*i/steps, lat1]);
-        for(let i=0;i<=steps;i++) pts.push([lon2, lat1+(lat2-lat1)*i/steps]);
-        for(let i=0;i<=steps;i++) pts.push([lon2-(lon2-lon1)*i/steps, lat2]);
-        for(let i=0;i<=steps;i++) pts.push([lon1, lat2-(lat2-lat1)*i/steps]);
-        return pts;
-      };
-      landPaths.push(rect(-130,7,-60,55));
-      landPaths.push(rect(-80,-55,-35,12));
-      landPaths.push(rect(-10,35,40,72));
-      landPaths.push(rect(20,5,150,55));
-      landPaths.push(rect(110,-45,155,-10));
-      landPaths.push(rect(10,-35,45,5));
-    })();
+  // Stylized world outline
+  const landPaths = [];
+  (function buildRoughWorld(){
+    const rect = (lon1,lat1,lon2,lat2,steps=30)=>{
+      const pts=[];
+      for(let i=0;i<=steps;i++) pts.push([lon1+(lon2-lon1)*i/steps, lat1]);
+      for(let i=0;i<=steps;i++) pts.push([lon2, lat1+(lat2-lat1)*i/steps]);
+      for(let i=0;i<=steps;i++) pts.push([lon2-(lon2-lon1)*i/steps, lat2]);
+      for(let i=0;i<=steps;i++) pts.push([lon1, lat2-(lat2-lat1)*i/steps]);
+      return pts;
+    };
+    landPaths.push(rect(-130,7,-60,55));
+    landPaths.push(rect(-80,-55,-35,12));
+    landPaths.push(rect(-10,35,40,72));
+    landPaths.push(rect(20,5,150,55));
+    landPaths.push(rect(110,-45,155,-10));
+    landPaths.push(rect(10,-35,45,5));
+  })();
 
-    // Mercator projection
-    function project(lon,lat) {
-      const w = canvasTM.clientWidth, h = canvasTM.clientHeight;
-      const x = (lon + 180) * (w/360);
-      const latRad = lat * Math.PI/180;
-      const mercN = Math.log(Math.tan((Math.PI/4)+(latRad/2)));
-      const y = (h/2) - (w/(2*Math.PI))*mercN;
-      return [x,y];
-    }
+  // Mercator projection
+  function project(lon,lat) {
+    const w = canvasTM.clientWidth, h = canvasTM.clientHeight;
+    const x = (lon + 180) * (w/360);
+    const latRad = lat * Math.PI/180;
+    const mercN = Math.log(Math.tan((Math.PI/4)+(latRad/2)));
+    const y = (h/2) - (w/(2*Math.PI))*mercN;
+    return [x,y];
+  }
 
-    // Cities
-    const cities = [
-      {name:'New York, US', lat:40.71, lon:-74.01, code:'US'},
-      {name:'Los Angeles, US', lat:34.05, lon:-118.24, code:'US'},
-      {name:'São Paulo, BR', lat:-23.55, lon:-46.63, code:'BR'},
-      {name:'London, GB', lat:51.51, lon:-0.13, code:'GB'},
-      {name:'Frankfurt, DE', lat:50.11, lon:8.68, code:'DE'},
-      {name:'Moscow, RU', lat:55.75, lon:37.62, code:'RU'},
-      {name:'Delhi, IN', lat:28.61, lon:77.21, code:'IN'},
-      {name:'Singapore, SG', lat:1.35, lon:103.82, code:'SG'},
-      {name:'Tokyo, JP', lat:35.68, lon:139.69, code:'JP'},
-      {name:'Seoul, KR', lat:37.56, lon:126.97, code:'KR'},
-      {name:'Sydney, AU', lat:-33.86, lon:151.21, code:'AU'},
-      {name:'Melbourne, AU', lat:-37.81, lon:144.96, code:'AU'},
-      {name:'Adelaide, AU', lat:-34.93, lon:138.60, code:'AU'},
-      {name:'Beijing, CN', lat:39.90, lon:116.40, code:'CN'},
-      {name:'Hong Kong, HK', lat:22.28, lon:114.16, code:'HK'},
-      {name:'Johannesburg, ZA', lat:-26.20, lon:28.04, code:'ZA'},
-      {name:'Tel Aviv, IL', lat:32.09, lon:34.78, code:'IL'},
-      {name:'Dubai, AE', lat:25.20, lon:55.27, code:'AE'},
-    ];
+  // Cities
+  const cities = [
+    {name:'New York, US', lat:40.71, lon:-74.01, code:'US'},
+    {name:'Los Angeles, US', lat:34.05, lon:-118.24, code:'US'},
+    {name:'São Paulo, BR', lat:-23.55, lon:-46.63, code:'BR'},
+    {name:'London, GB', lat:51.51, lon:-0.13, code:'GB'},
+    {name:'Frankfurt, DE', lat:50.11, lon:8.68, code:'DE'},
+    {name:'Moscow, RU', lat:55.75, lon:37.62, code:'RU'},
+    {name:'Delhi, IN', lat:28.61, lon:77.21, code:'IN'},
+    {name:'Singapore, SG', lat:1.35, lon:103.82, code:'SG'},
+    {name:'Tokyo, JP', lat:35.68, lon:139.69, code:'JP'},
+    {name:'Seoul, KR', lat:37.56, lon:126.97, code:'KR'},
+    {name:'Sydney, AU', lat:-33.86, lon:151.21, code:'AU'},
+    {name:'Melbourne, AU', lat:-37.81, lon:144.96, code:'AU'},
+    {name:'Adelaide, AU', lat:-34.93, lon:138.60, code:'AU'},
+    {name:'Beijing, CN', lat:39.90, lon:116.40, code:'CN'},
+    {name:'Hong Kong, HK', lat:22.28, lon:114.16, code:'HK'},
+    {name:'Johannesburg, ZA', lat:-26.20, lon:28.04, code:'ZA'},
+    {name:'Tel Aviv, IL', lat:32.09, lon:34.78, code:'IL'},
+    {name:'Dubai, AE', lat:25.20, lon:55.27, code:'AE'},
+  ];
 
-    // Attack generator
-    const attacks = [];
-    function spawnAttack() {
-      const src = choice(cities);
-      let dst = choice(cities);
-      while(dst===src) dst = choice(cities);
+  // Attack generator
+  const attacks = [];
+  function spawnAttack() {
+    const src = choice(cities);
+    let dst = choice(cities);
+    while(dst===src) dst = choice(cities);
+    const t0 = performance.now();
+    const duration = rand(1400, 2600);
+    const severity = choice(['low','medium','high']);
+    const kind = choice(['SSH Brute Force','DDoS Probe','SQL Injection','Malware Beacon','RDP Attempt','Port Scan']);
+    const proto = choice(['TCP','UDP','HTTPS','SSH','RDP']);
+    const [x1,y1] = project(src.lon, src.lat);
+    const [x2,y2] = project(dst.lon, dst.lat);
+    const mx = (x1+x2)/2, my=(y1+y2)/2;
+    const dx = x2-x1, dy=y2-y1;
+    const len = Math.hypot(dx,dy) || 1;
+    const nx = -dy/len, ny = dx/len;
+    const lift = Math.min(120, Math.max(40, len*0.18));
+    const cx = mx + nx * lift, cy = my + ny * lift;
+    attacks.push({src,dst,x1,y1,x2,y2,cx,cy,t0,duration,severity,kind,proto});
+    pushAlert({src,dst,severity:severity, type:kind, proto});
+    bumpKpis(severity, src.code);
+  }
+  setInterval(spawnAttack, 900);
 
-      const t0 = performance.now();
-      const duration = rand(1400, 2600);
-      const severity = choice(['low','medium','high']);
-      const kind = choice(['SSH Brute Force','DDoS Probe','SQL Injection','Malware Beacon','RDP Attempt','Port Scan']);
-      const proto = choice(['TCP','UDP','HTTPS','SSH','RDP']);
+  // Alerts & KPIs
+  const alertsEl = document.getElementById('alerts');
+  function pushAlert(a){
+    const row = document.createElement('div'); row.className='alert-item';
+    const sevClass = a.severity==='high'?'sev-high':(a.severity==='medium'?'sev-med':'sev-low');
+    row.innerHTML = ` 
+<span class="alert-ts">[${nowTs()}]</span> 
+${a.type} detected — ${a.proto} 
+<span class="alert-sev ${sevClass}">${a.severity.toUpperCase()}</span> 
+<br><span style="color:#9adfe0">Source:</span> ${a.src.name} → <span style="color:#9adfe0">Target:</span> ${a.dst.name} 
+`;
+    alertsEl.prepend(row);
+    while(alertsEl.children.length>60) alertsEl.removeChild(alertsEl.lastChild);
+  }
+  const kpiThreats = document.getElementById('kpi-threats');
+  const kpiBlocked = document.getElementById('kpi-blocked');
+  const kpiAnom = document.getElementById('kpi-anomalies');
+  const kpiTop = document.getElementById('kpi-top');
+  const countryTally = {};
+  function bumpKpis(sev, country){
+    kpiThreats.textContent = (+kpiThreats.textContent)+1;
+    if(sev==='high' && Math.random()>0.35) kpiBlocked.textContent = (+kpiBlocked.textContent)+1;
+    if(Math.random()>0.84) kpiAnom.textContent = (+kpiAnom.textContent)+1;
+    countryTally[country]=(countryTally[country]||0)+1;
+    let top = '—', max=-1; for(const [c,v] of Object.entries(countryTally)){ if(v>max){max=v; top=c;} }
+    kpiTop.textContent = top;
+  }
 
-      const [x1,y1] = project(src.lon, src.lat);
-      const [x2,y2] = project(dst.lon, dst.lat);
+  function drawWorld() {
+    const w=canvasTM.clientWidth, h=canvasTM.clientHeight;
+    g.save(); g.globalAlpha = 0.05; g.strokeStyle = '#00ffe5';
+    for(let x=0; x<w; x+=40){ g.beginPath(); g.moveTo(x,0); g.lineTo(x,h); g.stroke(); }
+    for(let y=0; y<h; y+=40){ g.beginPath(); g.moveTo(0,y); g.lineTo(w,y); g.stroke(); }
+    g.restore();
 
-      const mx = (x1+x2)/2, my=(y1+y2)/2;
-      const dx = x2-x1, dy=y2-y1;
-      const len = Math.hypot(dx,dy) || 1;
-      const nx = -dy/len, ny = dx/len;
-      const lift = Math.min(120, Math.max(40, len*0.18));
-      const cx = mx + nx * lift, cy = my + ny * lift;
+    g.save(); g.strokeStyle = '#00ffe577'; g.lineWidth = 1; g.shadowColor = '#00ffe5'; g.shadowBlur = 6;
+    landPaths.forEach(path=>{ 
+      g.beginPath(); 
+      path.forEach(([lon,lat],i)=>{ const [x,y]=project(lon,lat); if(i===0) g.moveTo(x,y); else g.lineTo(x,y); }); 
+      g.closePath(); g.stroke(); 
+    });
+    g.restore();
 
-      attacks.push({src,dst,x1,y1,x2,y2,cx,cy,t0,duration,severity,kind,proto});
-      pushAlert({src,dst,severity:severity, type:kind, proto});
-      bumpKpis(severity, src.code);
-    }
-    setInterval(spawnAttack, 900);
+    const t=performance.now();
+    cities.forEach(ct=>{ 
+      const [x,y]=project(ct.lon, ct.lat); 
+      g.beginPath(); 
+      const pulse = 2 + Math.sin(t/500 + x)*1.2; 
+      g.fillStyle = 'rgba(0,255,229,0.85)'; 
+      g.arc(x,y,pulse,0,Math.PI*2); 
+      g.fill(); 
+    });
+  }
 
-    // Alerts & KPIs
-    const alertsEl = document.getElementById('alerts');
-    function pushAlert(a){
-      const row = document.createElement('div'); row.className='alert-item';
-      const sevClass = a.severity==='high'?'sev-high':(a.severity==='medium'?'sev-med':'sev-low');
-      row.innerHTML = `
-        <span class="alert-ts">[${nowTs()}]</span>
-        ${a.type} detected — ${a.proto}
-        <span class="alert-sev ${sevClass}">${a.severity.toUpperCase()}</span>
-        <br><span style="color:#9adfe0">Source:</span> ${a.src.name} → <span style="color:#9adfe0">Target:</span> ${a.dst.name}
-      `;
-      alertsEl.prepend(row);
-      while(alertsEl.children.length>60) alertsEl.removeChild(alertsEl.lastChild);
-    }
-
-    const kpiThreats = document.getElementById('kpi-threats');
-    const kpiBlocked = document.getElementById('kpi-blocked');
-    const kpiAnom = document.getElementById('kpi-anomalies');
-    const kpiTop = document.getElementById('kpi-top');
-    const countryTally = {};
-    function bumpKpis(sev, country){
-      kpiThreats.textContent = (+kpiThreats.textContent)+1;
-      if(sev==='high' && Math.random()>0.35) kpiBlocked.textContent = (+kpiBlocked.textContent)+1;
-      if(Math.random()>0.84) kpiAnom.textContent = (+kpiAnom.textContent)+1;
-      countryTally[country]=(countryTally[country]||0)+1;
-      let top = '—', max=-1; for(const [c,v] of Object.entries(countryTally)){ if(v>max){max=v; top=c;} }
-      kpiTop.textContent = top;
-    }
-
-    function drawWorld() {
-      const w=canvasTM.clientWidth, h=canvasTM.clientHeight;
-      g.save(); g.globalAlpha = 0.05; g.strokeStyle = '#00ffe5';
-      for(let x=0; x<w; x+=40){ g.beginPath(); g.moveTo(x,0); g.lineTo(x,h); g.stroke(); }
-      for(let y=0; y<h; y+=40){ g.beginPath(); g.moveTo(0,y); g.lineTo(w,y); g.stroke(); }
+  function drawAttacks() {
+    const now = performance.now();
+    for(let i=attacks.length-1;i>=0;i--){
+      const a = attacks[i]; const p = Math.min(1, (now - a.t0)/a.duration);
+      g.save();
+      const grd = g.createLinearGradient(a.x1,a.y1,a.x2,a.y2);
+      grd.addColorStop(0, a.severity==='high' ? '#ff4d4d' : (a.severity==='medium' ? '#ffbf35' : '#48f7ff'));
+      grd.addColorStop(1, '#48f7ff');
+      g.strokeStyle = grd; g.lineWidth = 2; g.shadowColor = '#00ffe5'; g.shadowBlur = 12;
+      g.beginPath(); g.moveTo(a.x1,a.y1); g.quadraticCurveTo(a.cx,a.cy, a.x2,a.y2); g.stroke();
       g.restore();
 
-      g.save(); g.strokeStyle = '#00ffe577'; g.lineWidth = 1; g.shadowColor = '#00ffe5'; g.shadowBlur = 6;
-      landPaths.forEach(path=>{ g.beginPath(); path.forEach(([lon,lat],i)=>{ const [x,y]=project(lon,lat); if(i===0) g.moveTo(x,y); else g.lineTo(x,y); }); g.closePath(); g.stroke(); });
-      g.restore();
+      const qx = (1-p)*(1-p)*a.x1 + 2*(1-p)*p*a.cx + p*p*a.x2;
+      const qy = (1-p)*(1-p)*a.y1 + 2*(1-p)*p*a.cy + p*p*a.y2;
+      g.beginPath(); g.fillStyle = '#48f7ff'; g.shadowColor = '#48f7ff'; g.shadowBlur = 18; g.arc(qx,qy, 3.5, 0, Math.PI*2); g.fill();
 
-      const t=performance.now();
-      cities.forEach(ct=>{ const [x,y]=project(ct.lon, ct.lat); g.beginPath(); const pulse = 2 + Math.sin(t/500 + x)*1.2; g.fillStyle = 'rgba(0,255,229,0.85)'; g.arc(x,y,pulse,0,Math.PI*2); g.fill(); });
+      const alpha = 0.4 + 0.6*Math.abs(Math.sin(now/200));
+      g.fillStyle = `rgba(255,77,77,${alpha})`; g.beginPath(); g.arc(a.x1,a.y1, 3, 0, Math.PI*2); g.fill();
+      g.fillStyle = `rgba(72,247,255,${alpha})`; g.beginPath(); g.arc(a.x2,a.y2, 3, 0, Math.PI*2); g.fill();
+
+      if(p>=1) attacks.splice(i,1);
     }
+  }
 
-    function drawAttacks() {
-      const now = performance.now();
-      for(let i=attacks.length-1;i>=0;i--){
-        const a = attacks[i]; const p = Math.min(1, (now - a.t0)/a.duration);
-        g.save();
-        const grd = g.createLinearGradient(a.x1,a.y1,a.x2,a.y2);
-        grd.addColorStop(0, a.severity==='high' ? '#ff4d4d' : (a.severity==='medium' ? '#ffbf35' : '#48f7ff'));
-        grd.addColorStop(1, '#48f7ff');
-        g.strokeStyle = grd; g.lineWidth = 2; g.shadowColor = '#00ffe5'; g.shadowBlur = 12;
-        g.beginPath(); g.moveTo(a.x1,a.y1); g.quadraticCurveTo(a.cx,a.cy, a.x2,a.y2); g.stroke();
-        g.restore();
-
-        const qx = (1-p)*(1-p)*a.x1 + 2*(1-p)*p*a.cx + p*p*a.x2;
-        const qy = (1-p)*(1-p)*a.y1 + 2*(1-p)*p*a.cy + p*p*a.y2;
-        g.beginPath(); g.fillStyle = '#48f7ff'; g.shadowColor = '#48f7ff'; g.shadowBlur = 18; g.arc(qx,qy, 3.5, 0, Math.PI*2); g.fill();
-
-        const alpha = 0.4 + 0.6*Math.abs(Math.sin(now/200));
-        g.fillStyle = `rgba(255,77,77,${alpha})`; g.beginPath(); g.arc(a.x1,a.y1, 3, 0, Math.PI*2); g.fill();
-        g.fillStyle = `rgba(72,247,255,${alpha})`; g.beginPath(); g.arc(a.x2,a.y2, 3, 0, Math.PI*2); g.fill();
-
-        if(p>=1) attacks.splice(i,1);
-      }
-    }
-
-    function tick(){
-      g.fillStyle='rgba(0,0,0,0.08)';
-      g.fillRect(0,0,canvasTM.clientWidth,canvasTM.clientHeight);
-      drawWorld();
-      drawAttacks();
-      requestAnimationFrame(tick);
-    }
+  function tick(){
+    g.fillStyle='rgba(0,0,0,0.08)';
+    g.fillRect(0,0,canvasTM.clientWidth,canvasTM.clientHeight);
     drawWorld();
-    tick();
+    drawAttacks();
+    requestAnimationFrame(tick);
+  }
+  drawWorld();
+  tick();
 
-    // Boot overlay
-    (function boot(){
-      const mapEl = document.querySelector('.map');
-      if(!mapEl) return;
-      const el = document.createElement('div');
-      el.style.cssText = "position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:#000b; color:#00ffe5; font-family:'Share Tech Mono', monospace; letter-spacing:1px; z-index:5;";
-      el.innerHTML = `<div id="bootLines"></div>`;
-      mapEl.appendChild(el);
-      const lines = [
-        'Initializing threat engine...',
-        'Loading intelligence sources...',
-        'Decrypting geospatial data...',
-        'Establishing secure uplink...',
-        'SYSTEM READY — Monitoring global activity.'
-      ];
-      const bootDiv = el.querySelector('#bootLines');
-      let i=0; const iv = setInterval(()=>{ bootDiv.innerHTML += (i?'\n':'') + lines[i]; i++; if(i>=lines.length){ clearInterval(iv); setTimeout(()=>{ el.remove(); }, 800); } }, 350);
+  // Boot overlay
+  (function boot(){
+    const mapEl = document.querySelector('.map');
+    if(!mapEl) return;
+    const el = document.createElement('div');
+    el.style.cssText = "position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:#000b; color:#00ffe5; font-family:'Share Tech Mono', monospace; letter-spacing:1px; z-index:5;";
+    el.innerHTML = `<div id="bootLines"></div>`;
+    mapEl.appendChild(el);
+    const lines = [
+      'Initializing threat engine...',
+      'Loading intelligence sources...',
+      'Decrypting geospatial data...',
+      'Establishing secure uplink...',
+      'SYSTEM READY — Monitoring global activity.'
+    ];
+    const bootDiv = el.querySelector('#bootLines');
+    let i=0; const iv = setInterval(()=>{ 
+      bootDiv.innerHTML += (i?'\n':'') + lines[i]; 
+      i++; 
+      if(i>=lines.length){ clearInterval(iv); setTimeout(()=>{ el.remove(); }, 800); } 
+    }, 350);
+  })();
+  </script>
+
+  <!-- Lightbox (click-to-zoom) -->
+  <div id="lbBackdrop" class="lightbox-backdrop" role="dialog" aria-modal="true" aria-label="Profile photo dialog">
+    <div class="lightbox-img-wrap">
+      <button id="lbClose" class="lightbox-close" aria-label="Close">✕</button>
+      <img id="lbImg" src="IMG_7641.PNG" alt="Profile photo large" />
+    </div>
+  </div>
+
+  <script>
+    // Lightbox interactions
+    (function () {
+      const backdrop = document.getElementById('lbBackdrop');
+      const closeBtn = document.getElementById('lbClose');
+      const largeImg = document.getElementById('lbImg');
+
+      document.addEventListener('click', function (e) {
+        const trigger = e.target.closest('.profile-zoom');
+        if (!trigger) return;
+        e.preventDefault();
+        // If you later use a small thumbnail, set largeImg.src to a higher-res file here.
+        // largeImg.src = 'IMG_7641_full.PNG';
+        backdrop.classList.add('open');
+        closeBtn.focus();
+      });
+
+      closeBtn.addEventListener('click', () => backdrop.classList.remove('open'));
+      backdrop.addEventListener('click', (e) => { if (e.target === backdrop) backdrop.classList.remove('open'); });
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') backdrop.classList.remove('open'); });
     })();
   </script>
 </body>
