@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Yash Cahoolessur — Portfolio</title>
+<link rel="icon" href="https://cdn-icons-png.flaticon.com/512/2092/2092663.png">
+<title>Cyber Security Student</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;700&family=DM+Mono:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
 <style>
@@ -190,6 +192,25 @@ footer span.accent{color:var(--accent)}
 .mobile-menu a{font-family:var(--font-display);font-size:48px;letter-spacing:.08em;color:var(--white);text-decoration:none;transition:color .2s}
 .mobile-menu a:hover{color:var(--accent)}
 
+.mobile-close {
+  position: absolute;
+  top: 24px;
+  right: 28px;
+  background: none;
+  border: none;
+  font-size: 36px;
+  color: var(--white);
+  cursor: pointer;
+  z-index: 160;
+  transition: color 0.25s, transform 0.25s;
+}
+
+.mobile-close:hover {
+  color: var(--accent);
+  transform: rotate(90deg);
+}
+
+
 /* =============================================
    LARGE DESKTOP  ≥ 1440px
    ============================================= */
@@ -333,6 +354,7 @@ footer span.accent{color:var(--accent)}
 
 <!-- MOBILE MENU OVERLAY -->
 <div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" onclick="closeMobileMenu()" aria-label="Close menu">✕</button>
   <a href="#about" onclick="closeMobileMenu()">About</a>
   <a href="#skills" onclick="closeMobileMenu()">Skills</a>
   <a href="#projects" onclick="closeMobileMenu()">Projects</a>
@@ -371,7 +393,7 @@ footer span.accent{color:var(--accent)}
     </div>
     <div class="hero-cta">
       <a href="#contact" class="btn-primary">Get In Touch →</a>
-      <a href="Yash_Resume.pdf" class="btn-outline">My Resume</a>
+      <a href="Yash_Resume.pdf" target="_blank" class="btn-outline">My Resume</a>
     </div>
   </div>
   <!-- Marquee strip -->
