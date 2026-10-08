@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Building a Detection Pipeline From Scratch — Yash Cahoolessur</title>
+<meta name="description" content="A SOC home lab built end to end: packet capture, Python detection modules, JSON alerting, and an AI classification layer mapped to MITRE ATT&CK — plus an honest account of what the detections would miss.">
+<link rel="icon" href="https://cdn-icons-png.flaticon.com/512/2092/2092663.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;700&family=DM+Mono:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0a0a0a;
+  --bg-alt:#0e0e0e;
+  --white:#f0ece3;
+  --accent:#e8ff47;
+  --blue:#3baaff;
+  --muted:rgba(240,236,227,0.35);
+  --line:rgba(240,236,227,0.1);
+  --font-display:'Bebas Neue',sans-serif;
+  --font-body:'Space Grotesk',sans-serif;
+  --font-mono:'DM Mono',monospace;
+}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{background:var(--bg);color:var(--white);font-family:var(--font-body);overflow-x:hidden;line-height:1.7}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;
+    padding:20px 48px;background:rgba(10,10,10,.88);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.nav-logo{font-family:var(--font-display);font-size:26px;letter-spacing:.08em;color:var(--white);text-decoration:none}
+.nav-logo span{color:var(--accent)}
+.nav-back{font-family:var(--font-mono);font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);
+          text-decoration:none;transition:color .2s;display:flex;align-items:center;gap:10px}
+.nav-back:hover{color:var(--accent)}
+
+.case-header{padding:180px 48px 80px;border-bottom:1px solid var(--line);position:relative;overflow:hidden}
+.case-header::after{content:'';position:absolute;top:-120px;right:-120px;width:420px;height:420px;
+  background:radial-gradient(circle,rgba(232,255,71,.07),transparent 68%);pointer-events:none}
+.case-eyebrow{font-family:var(--font-mono);font-size:12px;letter-spacing:.3em;text-transform:uppercase;
+              color:var(--accent);margin-bottom:22px}
+.case-title{font-family:var(--font-display);font-size:clamp(46px,7vw,98px);line-height:.95;letter-spacing:.01em;
+            max-width:17ch;margin-bottom:28px}
+.case-title .outline{-webkit-text-stroke:1.5px rgba(240,236,227,.4);color:transparent}
+.case-standfirst{font-size:19px;font-weight:300;color:var(--muted);max-width:64ch;line-height:1.75}
+.case-meta{display:flex;gap:48px;flex-wrap:wrap;margin-top:52px;padding-top:32px;border-top:1px solid var(--line)}
+.meta-item{min-width:120px}
+.meta-k{font-family:var(--font-mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;
+        color:rgba(240,236,227,.3);margin-bottom:8px}
+.meta-v{font-size:15px;color:var(--white);font-weight:500}
+.meta-v.live{color:var(--accent)}
+
+.case-body{max-width:840px;padding:0 48px;margin:0 auto}
+.block{padding:74px 0;border-bottom:1px solid var(--line)}
+.block:last-of-type{border-bottom:none}
+.block-index{font-family:var(--font-mono);font-size:11px;letter-spacing:.3em;text-transform:uppercase;
+             color:var(--accent);margin-bottom:14px}
+.block-title{font-family:var(--font-display);font-size:clamp(32px,4.6vw,52px);line-height:1;margin-bottom:26px;letter-spacing:.02em}
+.block p{font-size:17px;font-weight:300;color:rgba(240,236,227,.72);margin-bottom:20px}
+.block p:last-child{margin-bottom:0}
+.block strong{color:var(--white);font-weight:500}
+
+.scope-note{border:1px dashed rgba(240,236,227,.18);padding:24px 28px;background:rgba(240,236,227,.02);margin-bottom:8px}
+.scope-note p{font-family:var(--font-mono);font-size:13px;letter-spacing:.03em;color:rgba(240,236,227,.42);
+              line-height:1.85;margin:0}
+
+.pull{border-left:2px solid var(--accent);padding:4px 0 4px 26px;margin:34px 0;
+      font-size:18px;font-weight:300;color:var(--white);line-height:1.65}
+
+ul.case-list{list-style:none;margin:8px 0 20px}
+ul.case-list li{font-size:16.5px;font-weight:300;color:rgba(240,236,227,.72);padding-left:24px;
+                position:relative;margin-bottom:14px;line-height:1.7}
+ul.case-list li::before{content:'→';position:absolute;left:0;top:1px;color:var(--accent);font-size:13px}
+ul.case-list li strong{color:var(--white);font-weight:500}
+
+/* PIPELINE STAGES */
+.stages{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);
+        border:1px solid var(--line);margin:8px 0 24px}
+.stage{background:var(--bg);padding:24px 20px}
+.stage-n{font-family:var(--font-mono);font-size:10px;letter-spacing:.2em;color:var(--accent);margin-bottom:12px}
+.stage h3{font-family:var(--font-body);font-size:15px;font-weight:600;margin-bottom:8px;line-height:1.35}
+.stage p{font-size:13px;color:var(--muted);font-weight:300;line-height:1.6;margin:0}
+
+/* DETECTION TABLE */
+.map-wrap{overflow-x:auto;margin:8px 0 24px;border:1px solid var(--line)}
+table.map{width:100%;border-collapse:collapse;min-width:560px}
+table.map th{font-family:var(--font-mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;
+             color:var(--accent);text-align:left;padding:16px 18px;border-bottom:1px solid var(--line);
+             background:rgba(232,255,71,.03);font-weight:400;vertical-align:bottom}
+table.map td{padding:18px;border-bottom:1px solid var(--line);font-size:14.5px;font-weight:300;
+             color:rgba(240,236,227,.72);vertical-align:top;line-height:1.65}
+table.map tr:last-child td{border-bottom:none}
+table.map td.att{font-family:var(--font-mono);font-size:12.5px;color:var(--accent);white-space:nowrap}
+table.map td.det{color:var(--white);font-weight:500}
+
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:28px}
+.chip{font-family:var(--font-mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+      padding:5px 13px;border:1px solid rgba(240,236,227,.15);color:var(--muted)}
+
+.case-next{padding:74px 48px 96px;background:var(--bg-alt);border-top:1px solid var(--line);text-align:center}
+.case-next .block-index{margin-bottom:18px}
+.next-line{font-family:var(--font-display);font-size:clamp(32px,4.6vw,56px);line-height:1;margin-bottom:34px}
+.btn-primary{display:inline-flex;align-items:center;gap:10px;background:var(--accent);color:#0a0a0a;
+  font-family:var(--font-mono);font-size:12px;letter-spacing:.2em;text-transform:uppercase;padding:16px 36px;
+  text-decoration:none;font-weight:500;transition:background .25s}
+.btn-primary:hover{background:var(--white)}
+
+footer{padding:30px 48px;border-top:1px solid var(--line);display:flex;justify-content:space-between;
+       align-items:center;flex-wrap:wrap;gap:14px}
+footer span{font-family:var(--font-mono);font-size:11px;letter-spacing:.15em;color:rgba(240,236,227,.25);text-transform:uppercase}
+footer span.accent{color:var(--accent)}
+
+.reveal{opacity:0;transform:translateY(32px);transition:opacity .85s cubic-bezier(.16,1,.3,1),transform .85s cubic-bezier(.16,1,.3,1)}
+.reveal.visible{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
+
+@media(max-width:1023px){
+  nav{padding:18px 32px}
+  .case-header{padding:150px 32px 64px}
+  .case-body{padding:0 32px}
+  .case-next{padding:64px 32px 80px}
+  footer{padding:26px 32px}
+  .stages{grid-template-columns:1fr 1fr}
+}
+@media(max-width:767px){
+  nav{padding:16px 20px}
+  .nav-back{font-size:11px;letter-spacing:.12em}
+  .case-header{padding:130px 20px 52px}
+  .case-title{font-size:clamp(34px,9vw,58px)}
+  .case-standfirst{font-size:16px}
+  .case-meta{gap:28px;margin-top:40px}
+  .case-body{padding:0 20px}
+  .block{padding:54px 0}
+  .block p{font-size:15.5px}
+  ul.case-list li{font-size:15px}
+  .pull{font-size:16px;padding-left:20px}
+  .stages{grid-template-columns:1fr}
+  .scope-note{padding:20px}
+  .scope-note p{font-size:12px}
+  .case-next{padding:56px 20px 72px}
+  footer{padding:20px;flex-direction:column;text-align:center;gap:10px}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="../index.html" class="nav-logo">YC<span>.</span></a>
+  <a href="../index.html#projects" class="nav-back">← Back to projects</a>
+</nav>
+
+<header class="case-header">
+  <div class="case-eyebrow">Home lab · Detection engineering</div>
+  <h1 class="case-title">Building a Detection Pipeline <span class="outline">From Scratch</span></h1>
+  <p class="case-standfirst">
+    A working SOC workflow built end to end in a home lab — packet capture through to triaged,
+    ATT&amp;CK-mapped alerts, with no SIEM doing the thinking for me. Writing the detections myself is
+    what taught me where they break, which turned out to be the more useful half of the exercise.
+  </p>
+  <div class="case-meta">
+    <div class="meta-item">
+      <div class="meta-k">Status</div>
+      <div class="meta-v live">Complete</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-k">Environment</div>
+      <div class="meta-v">Self-hosted lab</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-k">Stack</div>
+      <div class="meta-v">Python · Linux · pcap</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-k">Mapped to</div>
+      <div class="meta-v">MITRE ATT&amp;CK</div>
+    </div>
+  </div>
+</header>
+
+<main class="case-body">
+
+  <section class="block reveal">
+    <div class="block-index">00 / Scope</div>
+    <div class="scope-note">
+      <p>
+        All activity described here was generated and observed on my own isolated lab equipment. The
+        page covers detection and analysis: how attacks were identified, what the detections caught, and
+        where they fail. It is deliberately not an offensive walkthrough, and contains no configuration
+        or instruction for conducting these attacks anywhere.
+      </p>
+    </div>
+  </section>
+
+  <section class="block reveal">
+    <div class="block-index">01 / Why build it</div>
+    <h2 class="block-title">Deploying a SIEM teaches you the SIEM</h2>
+    <p>
+      The standard home lab is a SIEM install with sample data loaded into it. You learn the interface,
+      which is worth something, but the detection logic arrives pre-written and the interesting decisions
+      have already been made by someone else. What counts as a brute-force attempt? Over what window?
+      How many failures before it's an alert rather than a user with a bad morning?
+    </p>
+    <p>
+      Building from raw capture upward means making those decisions directly.
+      So the pipeline runs from <strong>packet capture through detection modules and structured alerting to a classification layer</strong>, with the detection thresholds written into the modules themselves — and so every wrong threshold is findable.
+    </p>
+  </section>
+
+  <section class="block reveal">
+    <div class="block-index">02 / The pipeline</div>
+    <h2 class="block-title">Four stages, raw traffic to triaged alert</h2>
+    <div class="stages">
+      <div class="stage">
+        <div class="stage-n">01</div>
+        <h3>Capture</h3>
+        <p>Packet capture off the lab network into pcap, as the single source of truth for everything
+           downstream.</p>
+      </div>
+      <div class="stage">
+        <div class="stage-n">02</div>
+        <h3>Detect</h3>
+        <p>Python modules parsing captures for behavioural signatures — connection rates, failure
+           patterns, protocol anomalies.</p>
+      </div>
+      <div class="stage">
+        <div class="stage-n">03</div>
+        <h3>Alert</h3>
+        <p>Structured JSON output carrying source IP, packet counts and attack metadata, so alerts are
+           machine-readable rather than log lines.</p>
+      </div>
+      <div class="stage">
+        <div class="stage-n">04</div>
+        <h3>Classify</h3>
+        <p>An AI reasoning layer producing risk score, confidence, and a MITRE ATT&amp;CK technique
+           mapping for each alert.</p>
+      </div>
+    </div>
+    <p>
+      To generate traffic worth detecting I ran controlled attacks against the lab using Hydra and
+      hping3 — credential brute-forcing, ICMP flooding, and scanning activity. The point wasn't the
+      attacks; it was having ground truth. When you know exactly what you launched and when, a missed
+      detection is unambiguous rather than a maybe.
+    </p>
+  </section>
+
+  <section class="block reveal">
+    <div class="block-index">03 / What it caught</div>
+    <h2 class="block-title">Detections and their ATT&amp;CK mappings</h2>
+    <div class="map-wrap">
+      <table class="map">
+        <thead>
+          <tr>
+            <th style="width:26%">Detection</th>
+            <th style="width:16%">Technique</th>
+            <th>Signal used</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="det">SSH brute force</td>
+            <td class="att">T1110</td>
+            <td>Authentication failure volume and rate from a single source — over 85,000 attempts
+                observed in the heaviest run.</td>
+          </tr>
+          <tr>
+            <td class="det">Network service discovery</td>
+            <td class="att">T1046</td>
+            <td>Connection attempts fanning across ports and hosts from one origin in a short window.</td>
+          </tr>
+          <tr>
+            <td class="det">Network denial of service</td>
+            <td class="att">T1498</td>
+            <td>ICMP volume well beyond baseline, with packet-rate and source concentration as the
+                discriminators.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p>
+      Mapping to ATT&amp;CK adds more than a label. A detection that fires is a fact; a detection
+      tied to a technique is the beginning of a question — what does this actor usually do next, and
+      am I watching for that too?
+    </p>
+  </section>
+
+  <section class="block reveal">
+    <div class="block-index">04 / What it would miss</div>
+    <h2 class="block-title">85,000 attempts is the easy case</h2>
+    <p>
+      This is the section I'd want to be asked about. Every detection above fires on volume, and volume
+      is the loudest possible version of each attack. A real intrusion is usually quieter than lab traffic by orders of magnitude.
+    </p>
+    <div class="pull">
+      Detections tuned on high-volume traffic catch an attacker who isn't trying to hide. A patient attacker walks straight under their thresholds.
+    </div>
+    <p>
+      Concretely: <strong>password spraying</strong> (T1110.003) inverts the pattern my brute-force
+      detection depends on — a handful of attempts against many accounts rather than many against one.
+      Per-source failure counts stay low, so a threshold tuned on high-volume traffic never trips. Catching it
+      needs the aggregation flipped: failures per <em>account</em> across sources, or per source across
+      accounts, over a much longer window.
+    </p>
+    <p>
+      Similarly, slow scanning defeats a rate-based discovery detection simply by waiting. And a DoS
+      detection keyed to ICMP volume from a concentrated source is the single easiest variant to catch
+      — distributed or application-layer floods look nothing like it.
+    </p>
+    <p>
+      None of this makes the pipeline useless. It makes it a detection set with a known profile: good
+      against unsophisticated and automated activity, blind to patience. Knowing which is which is the
+      difference between a detection set and a false sense of coverage.
+    </p>
+  </section>
+
+  <section class="block reveal">
+    <div class="block-index">05 / The AI layer, honestly</div>
+    <h2 class="block-title">Where an AI layer helps, and where it doesn't</h2>
+    <p>
+      The classification layer takes each alert and returns a risk score, a confidence level and an
+      ATT&amp;CK mapping. It's the most impressive-sounding part of the build and deserves the most
+      scepticism, so:
+    </p>
+    <ul class="case-list">
+      <li><strong>For attacks the detections already identify, it adds little.</strong> If a brute-force module fires, the technique is T1110. A lookup table gets that right every time, faster and for free. Dressing a mapping up as inference isn't an improvement.</li>
+      <li><strong>Confidence scores are only useful if they're validated against outcomes.</strong> A confidence number that hasn't been measured is decoration — worse than no number, because it invites trust it hasn't earned.</li>
+      <li><strong>Where it is most defensible is summarisation and context.</strong> Turning a cluster of related alerts into a short account of what appears to be happening is real triage work, and it's a more useful direction than the scoring.</li>
+    </ul>
+    <p>
+      It is better to state that plainly than to claim an AI layer is doing more than it is.
+    </p>
+  </section>
+
+  <section class="block reveal">
+    <div class="block-index">06 / Next</div>
+    <h2 class="block-title">Where it goes</h2>
+    <ul class="case-list">
+      <li>Rebuild the brute-force detection around per-account aggregation over long windows, then test
+          it against a deliberately slow, low-volume spray to see if it actually holds.</li>
+      <li>Derive thresholds from an observed baseline period of normal traffic rather than from attack traffic alone.</li>
+      <li>Add alert deduplication and correlation — 85,000 attempts should surface as one incident with
+          a count, not as volume in an analyst's queue.</li>
+      <li>Validate the confidence scores against known ground truth, or remove them.</li>
+    </ul>
+    <div class="chips">
+      <span class="chip">Detection Engineering</span>
+      <span class="chip">Python</span>
+      <span class="chip">Packet Analysis</span>
+      <span class="chip">MITRE ATT&amp;CK</span>
+      <span class="chip">SOC Operations</span>
+      <span class="chip">Linux</span>
+      <span class="chip">Threat Intelligence</span>
+    </div>
+  </section>
+
+</main>
+
+<section class="case-next">
+  <div class="block-index">Contact</div>
+  <div class="next-line">Ask me what it misses.</div>
+  <a href="../index.html#contact" class="btn-primary">Get in touch →</a>
+</section>
+
+<footer>
+  <span>Built by <span class="accent">Yash Cahoolessur</span></span>
+  <span>MSc Cybersecurity · Flinders University</span>
+  <span>© 2026</span>
+</footer>
+
+<script>
+const obs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } });
+},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+
+</body>
+</html>
