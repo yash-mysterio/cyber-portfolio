@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Monitoring What You Can't Patch — Yash Cahoolessur</title>
+<meta name="description" content="A governance gap analysis of unpatchable connected devices: where continuous monitoring works as a compensating control, worked against SACSF V2.0 and cross-checked against the ASD Essential Eight and ISO/IEC 27001:2022.">
+<link rel="icon" href="https://cdn-icons-png.flaticon.com/512/2092/2092663.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;700&family=DM+Mono:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0a0a0a;
+  --bg-alt:#0e0e0e;
+  --white:#f0ece3;
+  --accent:#e8ff47;
+  --blue:#3baaff;
+  --muted:rgba(240,236,227,0.35);
+  --line:rgba(240,236,227,0.1);
+  --font-display:'Bebas Neue',sans-serif;
+  --font-body:'Space Grotesk',sans-serif;
+  --font-mono:'DM Mono',monospace;
+}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{background:var(--bg);color:var(--white);font-family:var(--font-body);overflow-x:hidden;line-height:1.7}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;
+    padding:20px 48px;background:rgba(10,10,10,.88);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.nav-logo{font-family:var(--font-display);font-size:26px;letter-spacing:.08em;color:var(--white);text-decoration:none}
+.nav-logo span{color:var(--accent)}
+.nav-back{font-family:var(--font-mono);font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);
+          text-decoration:none;transition:color .2s;display:flex;align-items:center;gap:10px}
+.nav-back:hover{color:var(--accent)}
+
+.case-header{padding:180px 48px 80px;border-bottom:1px solid var(--line);position:relative;overflow:hidden}
+.case-header::after{content:'';position:absolute;top:-120px;right:-120px;width:420px;height:420px;
+  background:radial-gradient(circle,rgba(232,255,71,.07),transparent 68%);pointer-events:none}
+.case-eyebrow{font-family:var(--font-mono);font-size:12px;letter-spacing:.3em;text-transform:uppercase;
+              color:var(--accent);margin-bottom:22px}
+.case-title{font-family:var(--font-display);font-size:clamp(46px,7vw,98px);line-height:.95;letter-spacing:.01em;
+            max-width:17ch;margin-bottom:28px}
+.case-title .outline{-webkit-text-stroke:1.5px rgba(240,236,227,.4);color:transparent}
+.case-standfirst{font-size:19px;font-weight:300;color:var(--muted);max-width:64ch;line-height:1.75}
+.case-meta{display:flex;gap:48px;flex-wrap:wrap;margin-top:52px;padding-top:32px;border-top:1px solid var(--line)}
+.meta-item{min-width:120px}
+.meta-k{font-family:var(--font-mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;
+        color:rgba(240,236,227,.3);margin-bottom:8px}
+.meta-v{font-size:15px;color:var(--white);font-weight:500}
+.meta-v.live{color:var(--accent)}
+
+.case-body{max-width:840px;padding:0 48px;margin:0 auto}
+.block{padding:74px 0;border-bottom:1px solid var(--line)}
+.block:last-of-type{border-bottom:none}
+.block-index{font-family:var(--font-mono);font-size:11px;letter-spacing:.3em;text-transform:uppercase;
+             color:var(--accent);margin-bottom:14px}
+.block-title{font-family:var(--font-display);font-size:clamp(32px,4.6vw,52px);line-height:1;margin-bottom:26px;letter-spacing:.02em}
+.block p{font-size:17px;font-weight:300;color:rgba(240,236,227,.72);margin-bottom:20px}
+.block p:last-child{margin-bottom:0}
+.block strong{color:var(--white);font-weight:500}
+
+.scope-note{border:1px dashed rgba(240,236,227,.18);padding:24px 28px;background:rgba(240,236,227,.02);margin-bottom:8px}
+.scope-note p{font-family:var(--font-mono);font-size:13px;letter-spacing:.03em;color:rgba(240,236,227,.42);
+              line-height:1.85;margin:0}
+
+.pull{border-left:2px solid var(--accent);padding:4px 0 4px 26px;margin:34px 0;
+      font-size:18px;font-weight:300;color:var(--white);line-height:1.65}
+
+ul.case-list{list-style:none;margin:8px 0 20px}
+ul.case-list li{font-size:16.5px;font-weight:300;color:rgba(240,236,227,.72);padding-left:24px;
+                position:relative;margin-bottom:14px;line-height:1.7}
+ul.case-list li::before{content:'→';position:absolute;left:0;top:1px;color:var(--accent);font-size:13px}
+ul.case-list li strong{color:var(--white);font-weight:500}
+
+/* MAPPING TABLE */
+.map-wrap{overflow-x:auto;margin:8px 0 24px;border:1px solid var(--line)}
+table.map{width:100%;border-collapse:collapse;min-width:620px}
+table.map th{font-family:var(--font-mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;
+             color:var(--accent);text-align:left;padding:16px 18px;border-bottom:1px solid var(--line);
+             background:rgba(232,255,71,.03);font-weight:400;vertical-align:bottom}
+table.map td{padding:18px;border-bottom:1px solid var(--line);font-size:14.5px;font-weight:300;
+             color:rgba(240,236,227,.72);vertical-align:top;line-height:1.65}
+table.map tr:last-child td{border-bottom:none}
+table.map td.ps{font-family:var(--font-mono);font-size:12.5px;color:var(--white);white-space:nowrap;letter-spacing:.02em}
+.tag-direct{font-family:var(--font-mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;
+            color:#0a0a0a;background:var(--accent);padding:3px 8px;white-space:nowrap}
+.tag-partial{font-family:var(--font-mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;
+             color:var(--accent);border:1px solid rgba(232,255,71,.4);padding:3px 8px;white-space:nowrap}
+.tag-gap{font-family:var(--font-mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;
+         color:var(--muted);border:1px solid rgba(240,236,227,.18);padding:3px 8px;white-space:nowrap}
+
+.legend{display:flex;gap:20px;flex-wrap:wrap;margin-bottom:24px;font-family:var(--font-mono);
+        font-size:11px;color:var(--muted);letter-spacing:.05em}
+.legend span{display:flex;align-items:center;gap:8px}
+
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:28px}
+.chip{font-family:var(--font-mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+      padding:5px 13px;border:1px solid rgba(240,236,227,.15);color:var(--muted)}
+
+.srcs{font-family:var(--font-mono);font-size:12.5px;color:rgba(240,236,227,.32);line-height:2}
+.srcs a{color:rgba(240,236,227,.5);text-decoration:none;border-bottom:1px solid rgba(240,236,227,.15)}
+.srcs a:hover{color:var(--accent);border-color:var(--accent)}
+
+.case-next{padding:74px 48px 96px;background:var(--bg-alt);border-top:1px solid var(--line);text-align:center}
+.case-next .block-index{margin-bottom:18px}
+.next-line{font-family:var(--font-display);font-size:clamp(32px,4.6vw,56px);line-height:1;margin-bottom:34px}
+.btn-primary{display:inline-flex;align-items:center;gap:10px;background:var(--accent);color:#0a0a0a;
+  font-family:var(--font-mono);font-size:12px;letter-spacing:.2em;text-transform:uppercase;padding:16px 36px;
+  text-decoration:none;font-weight:500;transition:background .25s}
+.btn-primary:hover{background:var(--white)}
+
+footer{padding:30px 48px;border-top:1px solid var(--line);display:flex;justify-content:space-between;
+       align-items:center;flex-wrap:wrap;gap:14px}
+footer span{font-family:var(--font-mono);font-size:11px;letter-spacing:.15em;color:rgba(240,236,227,.25);text-transform:uppercase}
+footer span.accent{color:var(--accent)}
+
+.reveal{opacity:0;transform:translateY(32px);transition:opacity .85s cubic-bezier(.16,1,.3,1),transform .85s cubic-bezier(.16,1,.3,1)}
+.reveal.visible{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
+
+@media(max-width:1023px){
+  nav{padding:18px 32px}
+  .case-header{padding:150px 32px 64px}
+  .case-body{padding:0 32px}
+  .case-next{padding:64px 32px 80px}
+  footer{padding:26px 32px}
+}
+@media(max-width:767px){
+  nav{padding:16px 20px}
+  .nav-back{font-size:11px;letter-spacing:.12em}
+  .case-header{padding:130px 20px 52px}
+  .case-title{font-size:clamp(34px,9vw,58px)}
+  .case-standfirst{font-size:16px}
+  .case-meta{gap:28px;margin-top:40px}
+  .case-body{padding:0 20px}
+  .block{padding:54px 0}
+  .block p{font-size:15.5px}
+  ul.case-list li{font-size:15px}
+  .pull{font-size:16px;padding-left:20px}
+  .scope-note{padding:20px}
+  .scope-note p{font-size:12px}
+  .case-next{padding:56px 20px 72px}
+  footer{padding:20px;flex-direction:column;text-align:center;gap:10px}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="../index.html" class="nav-logo">YC<span>.</span></a>
+  <a href="../index.html#projects" class="nav-back">← Back to projects</a>
+</nav>
+
+<header class="case-header">
+  <div class="case-eyebrow">Self-directed exercise · Governance, Risk &amp; Compliance</div>
+  <h1 class="case-title">Monitoring What You <span class="outline">Can't Patch</span></h1>
+  <p class="case-standfirst">
+    Every regulated environment runs equipment it cannot patch — medical devices, industrial controllers,
+    legacy platforms with a decade left in them. Security frameworks assume patching. This is a gap
+    analysis of what happens when you can't: where continuous behavioural monitoring holds up as a
+    compensating control, and where it quietly doesn't. Worked in detail against one framework, then
+    cross-checked against two others.
+  </p>
+  <div class="case-meta">
+    <div class="meta-item">
+      <div class="meta-k">Type</div>
+      <div class="meta-v live">Self-directed exercise</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-k">Worked example</div>
+      <div class="meta-v">SACSF V2.0 (June 2025)</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-k">Cross-checked</div>
+      <div class="meta-v">Essential Eight · ISO 27001</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-k">Sources</div>
+      <div class="meta-v">Public documents only</div>
+    </div>
+  </div>
+</header>
+
+<main class="case-body">
+
+  <section class="block reveal">
+    <div class="block-index">00 / Scope and limits</div>
+    <div class="scope-note">
+      <p>
+        This is a student exercise, not an audit, an assessment, or advice. It applies publicly
+        available frameworks to a hypothetical deployment of my own research system. It does not describe
+        any real agency's security posture, and I have no knowledge of any agency's actual controls,
+        tier selection or attestation. Tier selection is the accountable authority's decision, not an
+        outsider's — the tier used here is a stated assumption so the mapping has something to work
+        against. Everything below draws on published SACSF documents only.
+      </p>
+    </div>
+  </section>
+
+  <section class="block reveal">
+    <div class="block-index">01 / The problem</div>
+    <h2 class="block-title">A detector is not a control</h2>
+    <p>
+      Almost every security framework in use assumes you can patch. Patching is usually the first or
+      second control listed, and the rest of the model is built on the assumption that known
+      vulnerabilities get closed. Large parts of the real world don't work that way: medical devices
+      certified against a fixed software configuration, industrial controllers on decade-long lifecycles,
+      legacy platforms too critical or too fragile to touch. In those environments the framework's
+      primary control is unavailable, and something else has to carry the risk.
+    </p>
+    <p>
+      For my thesis I built an anomaly-detection pipeline for medical IoT devices — the "something else"
+      in that sentence. It answers an engineering question well: can this detect attacks cheaply enough
+      to run at the edge? It leaves the more important one untouched. <strong>What would it take for
+      anyone to actually be allowed to deploy it</strong>, and what obligations would it inherit the day
+      it went live?
+    </p>
+    <p>
+      To answer that you need a real framework rather than a general argument, so I worked it in detail
+      against one — the South Australian Cyber Security Framework, a Cabinet-approved policy framework
+      drawing on NIST, the ISM, and ISO/IEC 27001 and 27002, with 18 policy statements across four
+      principles and requirements tiered across four levels. The specific framework matters less than
+      the method; section 05 checks whether the conclusions survive being moved to the Essential Eight
+      and ISO 27001, and they largely do.
+    </p>
+    <div class="pull">
+      Against a governance framework, a detector on its own satisfies almost nothing — it is evidence supporting several policy statements, and a compensating control for one.
+    </div>
+    <p>
+      A note on versions: the SACSF was updated to V2.0 in June 2025 and now has 18 policy statements. The superseded V1.1 had 21 and is still published for transition and attestation purposes, so numbering differs between sources and the statements don't map one-to-one — V2.0 merges supplier management with technology acquisition, and folds cloud computing and teleworking into other statements. This analysis uses V2.0 throughout.
+    </p>
+  </section>
+
+  <section class="block reveal">
+    <div class="block-index">02 / Scoping the assumption</div>
+    <h2 class="block-title">Why Tier Three</h2>
+    <p>
+      The mapping needs a tier, because requirements escalate with it. I've assumed Tier Three for a
+      health-delivery agency, on the framework's own published characteristics: a Tier Three agency may
+      operate a complex technology environment with critical legacy systems and more than 500 personnel,
+      hold a low appetite for cyber security risk, and manage a large volume of information classified
+      Official: Sensitive — the framework names health records explicitly in that category.
+    </p>
+    <p>
+      That matters for the mapping because several requirements only appear at Tier Two or Three:
+      centralised logging and threat intelligence integration, network segregation, and three-monthly
+      privileged access reviews among them. A Tier One assumption would make the system look far more
+      compliant than it is.
+    </p>
+  </section>
+
+  <section class="block reveal">
+    <div class="block-index">03 / The mapping</div>
+    <h2 class="block-title">Which policy statements bite</h2>
+    <p>
+      I worked through all 18 and kept the eight where a clinical IoMT monitoring deployment materially
+      changes the answer. The rest either sit outside the system boundary or are unaffected by it.
+    </p>
+    <div class="legend">
+      <span><em class="tag-direct">Supports</em> system contributes evidence</span>
+      <span><em class="tag-partial">Partial</em> helps, doesn't satisfy</span>
+      <span><em class="tag-gap">Gap</em> system creates or leaves a problem</span>
+    </div>
+    <div class="map-wrap">
+      <table class="map">
+        <thead>
+          <tr>
+            <th style="width:30%">Policy statement</th>
+            <th style="width:14%">Effect</th>
+            <th>What the IoMT system does to it</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="ps">2.7 Vulnerability<br>Management</td>
+            <td><em class="tag-direct">Supports</em></td>
+            <td>The strongest fit. Tier One requires a documented process for managing risks from
+                non-vendor-supported applications and operating systems where they're needed for a
+                specific purpose. Unpatchable infusion pumps and monitors are exactly that case.
+                Continuous behavioural monitoring is a defensible compensating control where patching
+                is impossible — and the framework explicitly allows compensating controls, provided
+                the agency can justify the level of risk mitigation and declares them at attestation.</td>
+          </tr>
+          <tr>
+            <td class="ps">2.8 Network<br>Communications</td>
+            <td><em class="tag-partial">Partial</em></td>
+            <td>Tier One requires documented network architecture with clearly defined zones, and
+                documented information flows for critical processes. Building the detector forces that
+                documentation to exist — you can't select flow features you haven't characterised. But
+                Tier Three requires network segregation, and detection is not segregation. It tells you
+                a device is misbehaving; it doesn't stop the traffic reaching anything.</td>
+          </tr>
+          <tr>
+            <td class="ps">2.6 Robust ICT Systems<br>and Operations</td>
+            <td><em class="tag-partial">Partial</em></td>
+            <td>Tier Two requires a documented event logging strategy, a centralised logging facility,
+                a consistent accurate time source across systems, and threat intelligence integrated
+                into monitoring. The detector produces events that must land in that facility rather
+                than its own store — and the time-source requirement is easy to overlook until
+                correlation across devices silently fails.</td>
+          </tr>
+          <tr>
+            <td class="ps">2.4 Access to<br>Information</td>
+            <td><em class="tag-partial">Partial</em></td>
+            <td>The trust engine's output is an access-relevant signal, which is the whole Zero Trust
+                premise. But the policy statement is about authorising human and system access on
+                business need with secure authentication — and the framework points to Guideline 17.0
+                Internet of Things Security for MFA guidance in this space. A trust score informs an
+                access decision; it doesn't constitute an authorisation model.</td>
+          </tr>
+          <tr>
+            <td class="ps">2.2 Incident<br>Management</td>
+            <td><em class="tag-gap">Gap</em></td>
+            <td>A detector without a response path is an alarm nobody is required to answer.
+                Deployment would need cyber incident response folded into the agency's incident
+                management policy, post-incident review, and a formalised route for reporting events to
+                the SA Government Cyber Security Watch Desk. At Tier Three, pre-approved containment
+                actions are also expected — which for a clinical device is a genuinely hard question,
+                since isolating a monitor is itself a patient-safety event.</td>
+          </tr>
+          <tr>
+            <td class="ps">2.1 Information Asset<br>Identification</td>
+            <td><em class="tag-gap">Gap</em></td>
+            <td>Assets must be recorded in an asset register, assigned an owner, and classified.
+                Detection assumes you know which devices exist. In practice, unmanaged clinical devices
+                are frequently the ones missing from the register — so the detector's own coverage
+                depends on a control it can't supply.</td>
+          </tr>
+          <tr>
+            <td class="ps">1.3 Risk<br>Management</td>
+            <td><em class="tag-partial">Partial</em></td>
+            <td>Requires cyber risks documented in a register, reviewed by the Agency Security
+                Committee, and assessed for all projects carrying cyber risk. The thesis produces
+                exactly the evidence base a risk assessment needs — measured detection rates per
+                configuration — but that's an input to the process, not the process.</td>
+          </tr>
+          <tr>
+            <td class="ps">1.5 Supplier Management<br>and Acquisition</td>
+            <td><em class="tag-gap">Gap</em></td>
+            <td>Most clinical devices arrive through procurement, and V2.0 requires a risk assessment
+                before acquisition plus documented cyber obligations in supplier agreements. The
+                honest observation: a detection layer is what you build because the procurement control
+                wasn't applied ten years ago. Getting 1.5 right upstream reduces how much 2.7 has to
+                compensate for downstream.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="block reveal">
+    <div class="block-index">04 / Findings</div>
+    <h2 class="block-title">Three findings</h2>
+    <ul class="case-list">
+      <li><strong>A good detector is not the deliverable.</strong> Against the framework it's a
+          compensating control supporting one policy statement and contributing evidence to a few more.
+          The governance around it — asset register, incident path, risk register entry, ownership — is
+          most of the actual work, and none of it is technical.</li>
+      <li><strong>The assumed tier changes the answer.</strong> Assessed against Tier One requirements,
+          a detection-only approach looks adequate. Segregation, centralised logging and threat
+          intelligence integration only appear higher up, and they're precisely where detection alone
+          stops being sufficient.</li>
+      <li><strong>Containment isn't obviously safe in a clinical setting.</strong> The Tier Three
+          expectation of pre-approved containment actions is straightforward on a corporate network and
+          genuinely difficult on a patient monitor. Isolating a compromised device and isolating a
+          device a clinician is relying on can be the same action. This analysis doesn't resolve that —
+          but it means automated response has a patient-safety ceiling, which bears on how far a trust
+          engine should be allowed to act on its own.</li>
+    </ul>
+  </section>
+
+  <section class="block reveal">
+    <div class="block-index">05 / Does it travel?</div>
+    <h2 class="block-title">The same gap, in two other frameworks</h2>
+    <p>
+      A mapping against one framework is only useful if the reasoning holds elsewhere. I checked the
+      central claim — that behavioural monitoring is a defensible compensating control for devices that
+      can't be patched — against the two frameworks most likely to be in use somewhere that isn't SA
+      Government.
+    </p>
+
+    <p><strong>ASD Essential Eight.</strong> The most interesting result, because the framework concedes
+    the point itself. Patch applications and patch operating systems are the first two of the eight
+    strategies, and the ASD's own maturity model FAQ states that the Essential Eight was designed to
+    protect internet-connected IT networks, that its principles may be applied to operational technology
+    but it was not designed for that purpose, and that implementing it on legacy systems is often
+    difficult in part or in full. So a medical-device fleet sits outside the model's design intent on
+    two axes at once — OT-like, and legacy.</p>
+
+    <p>That has a sharp consequence worth stating plainly. Essential Eight maturity is assessed
+    holistically, with overall maturity generally taken as the lowest level achieved across all eight
+    strategies, which discourages cherry-picking easy wins. A fleet you cannot patch therefore doesn't
+    just score badly on two strategies — it caps the assessed maturity of everything it's counted
+    within. The practical answer is usually scoping the unpatchable fleet as its own environment with
+    its own compensating controls, rather than letting it drag a whole-of-organisation number down.
+    Monitoring is what fills that scope.</p>
+
+    <p><strong>ISO/IEC 27001:2022.</strong> Annex A restructured into 93 controls across four themes,
+    and the relevant ones land close to the SACSF mapping: A.8.8 management of technical vulnerabilities
+    is the direct counterpart to SACSF 2.7, and A.8.16 monitoring activities — introduced in the 2022
+    revision — gives the compensating control an explicit home it didn't previously have. A.5.9
+    inventory of assets carries the same precondition problem, A.8.20 and A.8.22 cover networks security
+    and segregation, and A.5.7 threat intelligence matches the requirement that surfaced at higher
+    SACSF tiers. The Statement of Applicability is also a better fit for this argument than an
+    attestation: justifying a control as implemented by alternative means is exactly what that document
+    is for.</p>
+
+    <div class="pull">
+      All three frameworks reach the same place by different routes: monitoring doesn't substitute for
+      patching, it buys defensible time while the asset is retired, segregated, or replaced. Framing it
+      as a permanent answer is where this argument goes wrong.
+    </div>
+
+    <p>
+      The conclusion that transfers is not a mapping table. It's that a technical capability enters a
+      compliance conversation as evidence, not as a control — and that the work of turning it into a
+      control is governance: ownership, asset records, an incident path, a risk register entry, and a
+      written justification someone is accountable for signing.
+    </p>
+  </section>
+
+  <section class="block reveal">
+    <div class="block-index">06 / Next</div>
+    <h2 class="block-title">Where I'd take it</h2>
+    <ul class="case-list">
+      <li>Work through SACSF Guideline 17.0 (Internet of Things Security) and revise the mapping
+          against it — it's the guidance most specific to this class of device.</li>
+      <li>Build the scoping argument properly for the Essential Eight case: what a defensible
+          separate-environment scope for an unpatchable fleet looks like, and what evidence supports it.</li>
+      <li>Draft the risk register entries and Statement of Applicability justification the analysis
+          implies, rather than asserting that the evidence exists.</li>
+    </ul>
+    <div class="chips">
+      <span class="chip">GRC</span>
+      <span class="chip">Risk Management</span>
+      <span class="chip">Compensating Controls</span>
+      <span class="chip">Essential Eight</span>
+      <span class="chip">ISO 27001</span>
+      <span class="chip">SACSF V2.0</span>
+      <span class="chip">OT / IoT Security</span>
+    </div>
+  </section>
+
+  <section class="block reveal">
+    <div class="block-index">07 / Sources</div>
+    <h2 class="block-title">Documents used</h2>
+    <div class="srcs">
+      South Australian Cyber Security Framework V2.0, Office of the Chief Information Officer,
+      Department of Treasury and Finance, June 2025 — published at
+      <a href="https://www.security.sa.gov.au/cyber-security/tiles-for-cs/sacsf" target="_blank" rel="noopener">security.sa.gov.au</a>
+      under a Creative Commons Attribution licence.<br>
+      SACSF Guideline 9.0 — Essential Eight: Reporting and Use in SA Government.<br>
+      SACSF Guideline 17.0 — Internet of Things (IoT) Security.<br>
+      Essential Eight Maturity Model and its accompanying FAQ, Australian Signals Directorate /
+      Australian Cyber Security Centre —
+      <a href="https://www.cyber.gov.au/resources-business-and-government/essential-cybersecurity/essential-eight" target="_blank" rel="noopener">cyber.gov.au</a>.<br>
+      ISO/IEC 27001:2022, Annex A control set (referenced by control number; the standard itself is
+      not reproduced here).
+    </div>
+  </section>
+
+</main>
+
+<section class="case-next">
+  <div class="block-index">Contact</div>
+  <div class="next-line">Happy to be told where this is wrong.</div>
+  <a href="../index.html#contact" class="btn-primary">Get in touch →</a>
+</section>
+
+<footer>
+  <span>Built by <span class="accent">Yash Cahoolessur</span></span>
+  <span>MSc Cybersecurity · Flinders University</span>
+  <span>© 2026</span>
+</footer>
+
+<script>
+const obs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } });
+},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+
+</body>
+</html>
