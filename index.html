@@ -133,19 +133,20 @@ section{padding:140px 48px;position:relative;overflow:hidden}
 .coursework-head{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;margin-bottom:8px}
 .coursework-head h3{font-family:var(--font-display);font-size:28px;letter-spacing:.04em;color:var(--white);font-weight:400}
 .coursework-tag{font-family:var(--font-mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:rgba(240,236,227,.3);border:1px solid rgba(240,236,227,.14);padding:3px 10px}
-.coursework > p.cw-intro{font-size:14.5px;color:var(--muted);font-weight:300;max-width:62ch;margin-bottom:26px;line-height:1.7}
-.cw-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(240,236,227,.08);border:1px solid rgba(240,236,227,.08)}
-.cw-item{background:var(--bg);padding:26px 24px}
-.cw-unit{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
-.cw-item h4{font-family:var(--font-body);font-size:15.5px;font-weight:600;color:var(--white);margin-bottom:10px;line-height:1.4}
-.cw-item p{font-size:13.5px;color:var(--muted);font-weight:300;line-height:1.7;margin:0}
-.cw-item p strong{color:rgba(240,236,227,.72);font-weight:500}
-@media(max-width:767px){.cw-grid{grid-template-columns:1fr}.coursework{margin-top:40px;padding-top:32px}.coursework-head h3{font-size:24px}}
+.cw-intro{font-size:14.5px;color:var(--muted);font-weight:300;max-width:64ch;margin-bottom:28px;line-height:1.7}
+.uw-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(240,236,227,.08);border:1px solid rgba(240,236,227,.08)}
+.uw-card{background:var(--bg);padding:28px 24px;display:flex;flex-direction:column;gap:12px}
+.uw-unit{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+.uw-card h4{font-family:var(--font-body);font-size:16px;font-weight:600;color:var(--white);line-height:1.4;margin:0}
+.uw-team{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(240,236,227,.3)}
+.uw-part{font-size:13.5px;color:var(--muted);font-weight:300;line-height:1.7;margin:0}
+.uw-label{display:block;font-family:var(--font-mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:rgba(240,236,227,.5);margin-bottom:4px}
+.uw-chips{display:flex;gap:6px;flex-wrap:wrap}
+.uw-link{margin-top:auto;padding-top:6px;font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);text-decoration:none;border-bottom:1px solid transparent;align-self:flex-start;transition:border-color .2s}
+.uw-link:hover{border-bottom-color:var(--accent)}
+@media(max-width:1023px){.uw-grid{grid-template-columns:1fr}.coursework{margin-top:44px;padding-top:32px}.coursework-head h3{font-size:24px}}
 
 /* CERTIFICATIONS */
-#certifications{background:#0e0e0e}
-.cert-empty{border:1px dashed rgba(240,236,227,.16);padding:44px 40px;background:rgba(240,236,227,.02)}
-.cert-empty p{font-family:var(--font-mono);font-size:13px;letter-spacing:.05em;color:rgba(240,236,227,.35);line-height:1.8;max-width:60ch}
 
 /* EXPERIENCE */
 #experience{background:#0e0e0e}
@@ -376,7 +377,6 @@ footer span.accent{color:var(--accent)}
   <a href="#skills" onclick="closeMobileMenu()">Skills</a>
   <a href="#projects" onclick="closeMobileMenu()">Projects</a>
   <a href="#experience" onclick="closeMobileMenu()">Experience</a>
-  <a href="#certifications" onclick="closeMobileMenu()">Certifications</a>
   <a href="#contact" onclick="closeMobileMenu()">Contact</a>
 </div>
 
@@ -388,7 +388,6 @@ footer span.accent{color:var(--accent)}
     <li><a href="#skills">Skills</a></li>
     <li><a href="#projects">Projects</a></li>
     <li><a href="#experience">Experience</a></li>
-    <li><a href="#certifications">Certs</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
   <div class="nav-tag"><span class="dot-live"></span>Open to work</div>
@@ -569,32 +568,32 @@ footer span.accent{color:var(--accent)}
       <span class="coursework-tag">Group projects &middot; Flinders University</span>
     </div>
     <p class="cw-intro">
-      Assessed team assignments rather than work of my own. Listed for what I personally owned within each build.
+      Assessed team assignments, listed for what I personally owned. Across these units I also coordinated task breakdown and milestones for teams of four to five.
     </p>
-    <div class="projects-stack" style="margin-bottom:1px">
-    <a href="projects/bcdr-supply-chain.html" class="proj-row" style="grid-template-columns:1fr auto">
-      <div class="proj-main">
-        <div class="proj-status">COMP9721 &middot; my sections: roles, architecture, conclusions</div>
-        <div class="proj-name">The Clock Starts Before You Know What Happened</div>
-        <div class="proj-desc-text">A business continuity and disaster recovery plan for a cloud provider hit by a SolarWinds-style supply chain compromise. I owned the incident command structure and system architecture. In Australian critical infrastructure the SOCI Act and Notifiable Data Breaches clocks start at declaration &mdash; so the org chart has to answer who is authorised to declare before it answers who fixes the server.</div>
-        <div class="proj-chips">
-          <span class="chip">Incident Response</span><span class="chip">Business Continuity</span><span class="chip">SOCI Act</span><span class="chip">Privacy Act / NDB</span><span class="chip">CPS 234</span><span class="chip">OT Security</span>
-        </div>
-      </div>
-      <div class="proj-arrow">↗</div>
-    </a>
-    </div>
-    <div class="cw-grid" style="border-top:none">
-      <div class="cw-item">
-        <div class="cw-unit">COMP9033 &middot; Cloud &amp; Distributed Computing</div>
+    <div class="uw-grid">
+      <article class="uw-card">
+        <div class="uw-unit">COMP9721 &middot; Information Security</div>
+        <h4>Business continuity &amp; disaster recovery plan</h4>
+        <div class="uw-team">Team of five</div>
+        <p class="uw-part"><span class="uw-label">My part</span>Incident command structure, system architecture and conclusions for a supply chain compromise, with roles built around SOCI Act and Notifiable Data Breaches deadlines.</p>
+        <div class="uw-chips"><span class="chip">Incident Response</span><span class="chip">Business Continuity</span><span class="chip">SOCI Act</span><span class="chip">Zero Trust</span></div>
+        <a class="uw-link" href="projects/bcdr-supply-chain.html">Read the case study ↗</a>
+      </article>
+      <article class="uw-card">
+        <div class="uw-unit">COMP9033 &middot; Cloud &amp; Distributed Computing</div>
         <h4>Cloud network-monitoring system</h4>
-        <p>My component: configured <strong>AWS EC2</strong> instances and provisioned <strong>IBM Cloudant</strong>, set up access control and credentials, and owned the database side of the integration that let the monitoring application read and write against it. Application logic was another team member's.</p>
-      </div>
-      <div class="cw-item">
-        <div class="cw-unit">COMP8011 &middot; Full-Stack Web Development</div>
-        <h4>Task-management application</h4>
-        <p>Contributed database design. Across both units I coordinated task breakdown and milestones for teams of four to five, which is most of what kept delivery on schedule.</p>
-      </div>
+        <div class="uw-team">Team project</div>
+        <p class="uw-part"><span class="uw-label">My part</span>Configured AWS EC2 and IBM Cloudant, set up access control and credentials, and owned the database side of the application integration. Application logic was a teammate's.</p>
+        <div class="uw-chips"><span class="chip">AWS EC2</span><span class="chip">IBM Cloudant</span><span class="chip">Access Control</span></div>
+      </article>
+      <article class="uw-card">
+        <div class="uw-unit">COMP8011 &middot; Full-Stack Web Development</div>
+        <h4>TaskParty &mdash; collaborative task management app</h4>
+        <div class="uw-team">Team of five</div>
+        <p class="uw-part"><span class="uw-label">My part</span>Frontend architecture for a gamified task manager: the React and Vite foundation, React Router navigation, JSON mock data and the Git branching workflow that let five people build in parallel.</p>
+        <div class="uw-chips"><span class="chip">React</span><span class="chip">Vite</span><span class="chip">React Router</span><span class="chip">Git / GitHub</span></div>
+        <a class="uw-link" href="projects/taskparty.html">Read the case study ↗</a>
+      </article>
     </div>
   </div>
 </section>
@@ -761,20 +760,9 @@ footer span.accent{color:var(--accent)}
   </div>
 </section>
 
-<!-- CERTIFICATIONS -->
-<section id="certifications">
-  <div class="section-index reveal">06 / Certifications</div>
-  <div class="section-title reveal">CERTIFI<span class="outline">CATIONS</span></div>
-  <div class="cw-item reveal" style="border:1px solid rgba(240,236,227,.08)">
-    <div class="cw-unit">In progress</div>
-    <h4>CompTIA Security+</h4>
-    <p>Exam planned for early 2027.</p>
-  </div>
-</section>
-
 <!-- CONTACT -->
 <section id="contact">
-  <div class="section-index reveal" style="text-align:center">07 / Contact</div>
+  <div class="section-index reveal" style="text-align:center">06 / Contact</div>
   <div class="contact-huge reveal">LET'S<br><span class="outline">CONNECT</span></div>
   <a href="mailto:homeshcahoolessur@gmail.com" class="contact-email reveal">homeshcahoolessur@gmail.com</a>
   <div class="contact-links reveal">
