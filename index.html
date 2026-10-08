@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Yash Cahoolessur — Portfolio</title>
+<title>Yash Cahoolessur — Cybersecurity &amp; Network Security</title>
+<meta name="description" content="Yash Cahoolessur — MSc IT (Network &amp; Cybersecurity) student at Flinders University. SAP security, IAM and SOC-focused portfolio.">
 <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/2092/2092663.png">
-<title>Cyber Security Student</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;700&family=DM+Mono:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
 <style>
@@ -106,12 +106,9 @@ section{padding:140px 48px;position:relative;overflow:hidden}
 .skill-item:hover{background:rgba(232,255,71,.04)}
 .skill-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
 .skill-emoji{font-size:28px}
-.skill-pct{font-family:var(--font-display);font-size:40px;color:var(--accent)}
 .skill-name-text{font-size:17px;font-weight:600;color:var(--white);margin-bottom:6px}
 .skill-sub{font-family:var(--font-mono);font-size:11px;color:var(--muted);letter-spacing:.1em}
-.skill-bar{height:2px;background:rgba(240,236,227,.1);margin-top:16px;overflow:hidden}
-.skill-bar-fill{height:100%;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform 1.4s cubic-bezier(.16,1,.3,1)}
-.skill-bar-fill.animated{transform:scaleX(1)}
+.skill-source{display:inline-block;margin-top:16px;font-family:var(--font-mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);border:1px solid rgba(232,255,71,.3);padding:4px 10px}
 
 /* PROJECTS */
 #projects{background:var(--bg)}
@@ -128,6 +125,27 @@ section{padding:140px 48px;position:relative;overflow:hidden}
 .proj-chips{display:flex;gap:8px;flex-wrap:wrap}
 .chip{font-family:var(--font-mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;padding:4px 12px;border:1px solid rgba(240,236,227,.15);color:var(--muted)}
 .proj-arrow{font-size:28px;color:var(--muted);transition:all .3s;line-height:1}
+.proj-status{display:inline-block;font-family:var(--font-mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);border:1px solid rgba(232,255,71,.35);padding:4px 12px;margin-bottom:12px}
+.proj-slot{display:grid;grid-template-columns:80px 1fr;gap:40px;align-items:center;background:var(--bg);padding:36px;border:1px dashed rgba(240,236,227,.14);border-left:none;border-right:none}
+.proj-slot .proj-num{color:rgba(240,236,227,.08)}
+.proj-slot-text{font-family:var(--font-mono);font-size:13px;letter-spacing:.06em;color:rgba(240,236,227,.3);line-height:1.7}
+.coursework{margin-top:56px;border-top:1px solid rgba(240,236,227,.1);padding-top:40px}
+.coursework-head{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;margin-bottom:8px}
+.coursework-head h3{font-family:var(--font-display);font-size:28px;letter-spacing:.04em;color:var(--white);font-weight:400}
+.coursework-tag{font-family:var(--font-mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:rgba(240,236,227,.3);border:1px solid rgba(240,236,227,.14);padding:3px 10px}
+.coursework > p.cw-intro{font-size:14.5px;color:var(--muted);font-weight:300;max-width:62ch;margin-bottom:26px;line-height:1.7}
+.cw-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(240,236,227,.08);border:1px solid rgba(240,236,227,.08)}
+.cw-item{background:var(--bg);padding:26px 24px}
+.cw-unit{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
+.cw-item h4{font-family:var(--font-body);font-size:15.5px;font-weight:600;color:var(--white);margin-bottom:10px;line-height:1.4}
+.cw-item p{font-size:13.5px;color:var(--muted);font-weight:300;line-height:1.7;margin:0}
+.cw-item p strong{color:rgba(240,236,227,.72);font-weight:500}
+@media(max-width:767px){.cw-grid{grid-template-columns:1fr}.coursework{margin-top:40px;padding-top:32px}.coursework-head h3{font-size:24px}}
+
+/* CERTIFICATIONS */
+#certifications{background:#0e0e0e}
+.cert-empty{border:1px dashed rgba(240,236,227,.16);padding:44px 40px;background:rgba(240,236,227,.02)}
+.cert-empty p{font-family:var(--font-mono);font-size:13px;letter-spacing:.05em;color:rgba(240,236,227,.35);line-height:1.8;max-width:60ch}
 
 /* EXPERIENCE */
 #experience{background:#0e0e0e}
@@ -286,7 +304,6 @@ footer span.accent{color:var(--accent)}
   .skills-intro{position:static;font-size:15px}
   .skills-list{grid-template-columns:1fr 1fr}
   .skill-item{padding:20px 16px}
-  .skill-pct{font-size:32px}
   .skill-name-text{font-size:15px}
   .proj-intro-row{flex-direction:column;align-items:flex-start;gap:16px;margin-bottom:40px}
   .proj-row{grid-template-columns:40px 1fr auto;gap:14px;padding:24px 16px}
@@ -359,6 +376,7 @@ footer span.accent{color:var(--accent)}
   <a href="#skills" onclick="closeMobileMenu()">Skills</a>
   <a href="#projects" onclick="closeMobileMenu()">Projects</a>
   <a href="#experience" onclick="closeMobileMenu()">Experience</a>
+  <a href="#certifications" onclick="closeMobileMenu()">Certifications</a>
   <a href="#contact" onclick="closeMobileMenu()">Contact</a>
 </div>
 
@@ -370,6 +388,7 @@ footer span.accent{color:var(--accent)}
     <li><a href="#skills">Skills</a></li>
     <li><a href="#projects">Projects</a></li>
     <li><a href="#experience">Experience</a></li>
+    <li><a href="#certifications">Certs</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
   <div class="nav-tag"><span class="dot-live"></span>Open to work</div>
@@ -393,7 +412,7 @@ footer span.accent{color:var(--accent)}
     </div>
     <div class="hero-cta">
       <a href="#contact" class="btn-primary">Get In Touch →</a>
-      <a href="Yash_Resume.pdf" target="_blank" class="btn-outline">My Resume</a>
+      <a href="Yash_Resume.pdf" target="_blank" rel="noopener" class="btn-outline">My Resume</a>
     </div>
   </div>
   <!-- Marquee strip -->
@@ -431,8 +450,8 @@ footer span.accent{color:var(--accent)}
   <div class="about-grid">
     <div>
       <div class="about-big-text reveal">IT professional with <em>enterprise-grade</em> instincts.</div>
-      <p class="about-body reveal">I bridge the gap between hands-on security engineering and enterprise compliance. With 2+ years at Accenture administering SAP authorisation at scale, and a master's degree in network security underway, I bring both the technical depth and professional polish that modern security roles demand.</p>
-      <p class="about-body reveal" style="transition-delay:.1s">Currently seeking a Cybersecurity Analyst or SOC Analyst internship in Adelaide, where I can contribute from day one.</p>
+      <p class="about-body reveal">I bridge the gap between hands-on security engineering and enterprise compliance. With over a year at Accenture administering SAP authorisation at scale, and a master's degree in network security underway, I bring both the technical depth and professional polish that modern security roles demand.</p>
+      <p class="about-body reveal" style="transition-delay:.1s">Currently seeking graduate cybersecurity roles in Adelaide across security operations, governance and resilience, where I can contribute from day one.</p>
       <div class="stat-row">
         <div class="stat-box reveal" style="transition-delay:.15s">
           <div class="stat-num">20+</div>
@@ -496,70 +515,89 @@ footer span.accent{color:var(--accent)}
 
 
 <!-- PROJECTS -->
-<!-- <section id="projects">
+<section id="projects">
   <div class="section-index reveal">02 / Projects</div>
   <div class="proj-intro-row">
-    <div class="section-title reveal" style="margin-bottom:0">SELECT <span class="outline">Projects</span></div>
-    <p class="proj-intro-text reveal">Real builds. Real problems solved.</p>
+    <div class="section-title reveal" style="margin-bottom:0">SELECT <span class="outline">WORK</span></div>
+    <p class="proj-intro-text reveal">Self-directed research and builds, with the reasoning behind them. University work is listed separately below.</p>
   </div>
   <div class="projects-stack reveal">
-  <a href="https://github.com/yash-mysterio" target="_blank" class="proj-row">
+    <a href="projects/soc-detection-lab.html" class="proj-row">
       <div class="proj-num">01</div>
       <div class="proj-main">
-        <div class="proj-name">Network Intrusion Detection System</div>
-        <div class="proj-desc-text">Python-based IDS using Wireshark captures & custom rule sets to detect port scans, SYN floods, and anomalous traffic in a home lab.</div>
+        <div class="proj-status">Home lab &middot; complete</div>
+        <div class="proj-name">Building a Detection Pipeline From Scratch</div>
+        <div class="proj-desc-text">A full SOC workflow built end to end &mdash; packet capture, Python detection modules, structured JSON alerting, and an AI classification layer mapping each alert to MITRE ATT&amp;CK. Includes an honest account of what the detections would miss: everything above fires on volume, and a patient attacker walks under every threshold.</div>
         <div class="proj-chips">
-          <span class="chip">Python</span><span class="chip">Wireshark</span><span class="chip">Scapy</span><span class="chip">Network Security</span>
-        </div>
-      </div>
-      <div class="proj-arrow">↗</div>
-    </a> 
-    <a href="https://github.com/yash-mysterio" target="_blank" class="proj-row">
-      <div class="proj-num">02</div>
-      <div class="proj-main">
-        <div class="proj-name">SAP Role & Authorization Audit Tool</div>
-        <div class="proj-desc-text">Automated script to analyse SAP user roles, flag SoD conflicts, and generate compliance reports aligned with enterprise security policies.</div>
-        <div class="proj-chips">
-          <span class="chip">SAP Security</span><span class="chip">Python</span><span class="chip">Compliance</span><span class="chip">IAM</span>
-        </div>
-      </div>
-      <div class="proj-arrow">↗</div>
-    </a> -->
-  <!--   <a href="projectsproject-1.html" target="_blank" class="proj-row">
-      <div class="proj-num">01</div>
-      <div class="proj-main">
-        <div class="proj-name">AI SOC Homelab — Threat Monitoring </div>
-        <div class="proj-desc-text">ELK Stack SIEM pipeline ingesting, correlating, and visualising security events from simulated AD and Linux hosts. <span style="color:#ffa500;font-family:var(--font-mono);font-size:11px;letter-spacing:.1em">Completed</span></div>
-        <div class="proj-chips">
-          <span class="chip">ELK Stack</span><span class="chip">Active Directory</span><span class="chip">SIEM</span><span class="chip">Linux</span>
+          <span class="chip">Detection Engineering</span><span class="chip">Python</span><span class="chip">MITRE ATT&amp;CK</span><span class="chip">Packet Analysis</span><span class="chip">SOC Operations</span><span class="chip">Linux</span>
         </div>
       </div>
       <div class="proj-arrow">↗</div>
     </a>
-    <a href="projects/project-2.html" target="_blank" class="proj-row">
+
+    <a href="projects/iomt-zta.html" class="proj-row">
       <div class="proj-num">02</div>
       <div class="proj-main">
-        <div class="proj-name">AI SOC Homelab — Brute Force Attack </div>
-        <div class="proj-desc-text">ELK Stack SIEM pipeline ingesting, correlating, and visualising security events from simulated AD and Linux hosts. <span style="color:#ffa500;font-family:var(--font-mono);font-size:11px;letter-spacing:.1em">Completed</span></div>
+        <div class="proj-status">Master's thesis · in progress</div>
+        <div class="proj-name">Lightweight ML for Zero-Trust IoMT Anomaly Detection</div>
+        <div class="proj-desc-text">Investigating low-overhead machine learning models that detect anomalous network traffic on medical IoT devices, built to run inside a Zero Trust Architecture where compute budget is tightly constrained. The goal is detection accuracy that holds up without the resource cost most anomaly-detection pipelines assume &mdash; the constraint that matters in clinical environments.</div>
         <div class="proj-chips">
-          <span class="chip">ELK Stack</span><span class="chip">Active Directory</span><span class="chip">SIEM</span><span class="chip">Linux</span>
+          <span class="chip">Zero Trust</span><span class="chip">Anomaly Detection</span><span class="chip">IoMT</span><span class="chip">Python</span><span class="chip">Flinders University</span>
         </div>
       </div>
       <div class="proj-arrow">↗</div>
     </a>
-    <a href="https://github.com/yash-mysterio" target="_blank" class="proj-row">
-      <div class="proj-num">04</div>
+
+    <a href="projects/unpatchable-devices.html" class="proj-row">
+      <div class="proj-num">03</div>
       <div class="proj-main">
-        <div class="proj-name">OWASP Web App Vulnerability Assessment</div>
-        <div class="proj-desc-text">Full OWASP Top 10 assessment on a PHP/MySQL app — identified SQL injection, XSS, and broken auth, then implemented mitigations.</div>
+        <div class="proj-status">Self-directed exercise</div>
+        <div class="proj-name">Monitoring What You Can't Patch</div>
+        <div class="proj-desc-text">Every regulated environment runs equipment it can't patch &mdash; medical devices, industrial controllers, legacy platforms. Security frameworks assume you can. A governance gap analysis of where continuous monitoring holds up as a compensating control and where it doesn't, worked in detail against SACSF V2.0 and cross-checked against the ASD Essential Eight and ISO/IEC 27001:2022.</div>
         <div class="proj-chips">
-          <span class="chip">OWASP</span><span class="chip">PHP</span><span class="chip">SQL</span><span class="chip">Pen Testing</span>
+          <span class="chip">GRC</span><span class="chip">Risk Management</span><span class="chip">Essential Eight</span><span class="chip">ISO 27001</span><span class="chip">Compensating Controls</span><span class="chip">OT / IoT</span>
         </div>
       </div>
       <div class="proj-arrow">↗</div>
-    </a> 
+    </a>
+
   </div>
-</section> -->
+
+  <div class="coursework reveal">
+    <div class="coursework-head">
+      <h3>University Work</h3>
+      <span class="coursework-tag">Group projects &middot; Flinders University</span>
+    </div>
+    <p class="cw-intro">
+      Assessed team assignments rather than work of my own. Listed for what I personally owned within each build.
+    </p>
+    <div class="projects-stack" style="margin-bottom:1px">
+    <a href="projects/bcdr-supply-chain.html" class="proj-row" style="grid-template-columns:1fr auto">
+      <div class="proj-main">
+        <div class="proj-status">COMP9721 &middot; my sections: roles, architecture, conclusions</div>
+        <div class="proj-name">The Clock Starts Before You Know What Happened</div>
+        <div class="proj-desc-text">A business continuity and disaster recovery plan for a cloud provider hit by a SolarWinds-style supply chain compromise. I owned the incident command structure and system architecture. In Australian critical infrastructure the SOCI Act and Notifiable Data Breaches clocks start at declaration &mdash; so the org chart has to answer who is authorised to declare before it answers who fixes the server.</div>
+        <div class="proj-chips">
+          <span class="chip">Incident Response</span><span class="chip">Business Continuity</span><span class="chip">SOCI Act</span><span class="chip">Privacy Act / NDB</span><span class="chip">CPS 234</span><span class="chip">OT Security</span>
+        </div>
+      </div>
+      <div class="proj-arrow">↗</div>
+    </a>
+    </div>
+    <div class="cw-grid" style="border-top:none">
+      <div class="cw-item">
+        <div class="cw-unit">COMP9033 &middot; Cloud &amp; Distributed Computing</div>
+        <h4>Cloud network-monitoring system</h4>
+        <p>My component: configured <strong>AWS EC2</strong> instances and provisioned <strong>IBM Cloudant</strong>, set up access control and credentials, and owned the database side of the integration that let the monitoring application read and write against it. Application logic was another team member's.</p>
+      </div>
+      <div class="cw-item">
+        <div class="cw-unit">COMP8011 &middot; Full-Stack Web Development</div>
+        <h4>Task-management application</h4>
+        <p>Contributed database design. Across both units I coordinated task breakdown and milestones for teams of four to five, which is most of what kept delivery on schedule.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
 
 
@@ -578,74 +616,74 @@ footer span.accent{color:var(--accent)}
       <div class="skill-item">
         <div class="skill-top">
           <span class="skill-emoji">🛡️</span>
-          <span class="skill-pct">92</span>
         </div>
         <div class="skill-name-text">SAP Security</div>
-        <div class="skill-sub">Authorization, Roles & Compliance</div>
-        <div class="skill-bar"><div class="skill-bar-fill" style="width:92%"></div></div>
-      </div>
-      <div class="skill-item">
-        <div class="skill-top">
-          <span class="skill-emoji">🔍</span>
-          <span class="skill-pct">80</span>
-        </div>
-        <div class="skill-name-text">Wireshark</div>
-        <div class="skill-sub">Packet Capture & Analysis</div>
-        <div class="skill-bar"><div class="skill-bar-fill" style="width:80%"></div></div>
-      </div>
-      <div class="skill-item">
-        <div class="skill-top">
-          <span class="skill-emoji">🐍</span>
-          <span class="skill-pct">77</span>
-        </div>
-        <div class="skill-name-text">Python</div>
-        <div class="skill-sub">Scripting & Automation</div>
-        <div class="skill-bar"><div class="skill-bar-fill" style="width:75%"></div></div>
+        <div class="skill-sub">Authorisation, roles &amp; SOX compliance</div>
+        <span class="skill-source">Accenture · 16 months</span>
       </div>
       <div class="skill-item">
         <div class="skill-top">
           <span class="skill-emoji">🗄️</span>
-          <span class="skill-pct">75</span>
         </div>
-        <div class="skill-name-text">Active Directory</div>
-        <div class="skill-sub">IAM & Access Management</div>
-        <div class="skill-bar"><div class="skill-bar-fill" style="width:82%"></div></div>
+        <div class="skill-name-text">Active Directory &amp; IAM</div>
+        <div class="skill-sub">User access control &amp; governance</div>
+        <span class="skill-source">Accenture · 16 months</span>
+      </div>
+      <div class="skill-item">
+        <div class="skill-top">
+          <span class="skill-emoji">🔍</span>
+        </div>
+        <div class="skill-name-text">Wireshark</div>
+        <div class="skill-sub">Packet capture &amp; traffic analysis</div>
+        <span class="skill-source">Thesis research</span>
+      </div>
+      <div class="skill-item">
+        <div class="skill-top">
+          <span class="skill-emoji">🐍</span>
+        </div>
+        <div class="skill-name-text">Python</div>
+        <div class="skill-sub">Scripting &amp; ML pipelines</div>
+        <span class="skill-source">Thesis research</span>
       </div>
       <div class="skill-item">
         <div class="skill-top">
           <span class="skill-emoji">🌐</span>
-          <span class="skill-pct">85</span>
         </div>
-        <div class="skill-name-text">CISCO Networking</div>
-        <div class="skill-sub">Routing, Switching & Fundamentals</div>
-        <div class="skill-bar"><div class="skill-bar-fill" style="width:78%"></div></div>
+        <div class="skill-name-text">Cisco Networking</div>
+        <div class="skill-sub">Routing, switching &amp; fundamentals</div>
+        <span class="skill-source">Coursework</span>
+      </div>
+      <div class="skill-item">
+        <div class="skill-top">
+          <span class="skill-emoji">☁️</span>
+        </div>
+        <div class="skill-name-text">Cloud (AWS EC2, Cloudant)</div>
+        <div class="skill-sub">Instance config &amp; access control</div>
+        <span class="skill-source">Coursework</span>
       </div>
       <div class="skill-item">
         <div class="skill-top">
           <span class="skill-emoji">🐧</span>
-          <span class="skill-pct">78</span>
         </div>
         <div class="skill-name-text">Linux</div>
-        <div class="skill-sub">System Administration</div>
-        <div class="skill-bar"><div class="skill-bar-fill" style="width:74%"></div></div>
+        <div class="skill-sub">System administration</div>
+        <span class="skill-source">Coursework</span>
       </div>
       <div class="skill-item">
         <div class="skill-top">
           <span class="skill-emoji">🗃️</span>
-          <span class="skill-pct">80</span>
         </div>
         <div class="skill-name-text">SQL</div>
-        <div class="skill-sub">Database Querying</div>
-        <div class="skill-bar"><div class="skill-bar-fill" style="width:77%"></div></div>
+        <div class="skill-sub">Database querying</div>
+        <span class="skill-source">Coursework</span>
       </div>
       <div class="skill-item">
         <div class="skill-top">
           <span class="skill-emoji">💻</span>
-          <span class="skill-pct">90</span>
         </div>
         <div class="skill-name-text">PHP / HTML / CSS</div>
-        <div class="skill-sub">Web Development</div>
-        <div class="skill-bar"><div class="skill-bar-fill" style="width:70%"></div></div>
+        <div class="skill-sub">Web development</div>
+        <span class="skill-source">BSc coursework</span>
       </div>
     </div>
   </div>
@@ -723,22 +761,27 @@ footer span.accent{color:var(--accent)}
   </div>
 </section>
 
+<!-- CERTIFICATIONS -->
+<section id="certifications">
+  <div class="section-index reveal">06 / Certifications</div>
+  <div class="section-title reveal">CERTIFI<span class="outline">CATIONS</span></div>
+  <div class="cw-item reveal" style="border:1px solid rgba(240,236,227,.08)">
+    <div class="cw-unit">In progress</div>
+    <h4>CompTIA Security+</h4>
+    <p>Exam planned for early 2027.</p>
+  </div>
+</section>
+
 <!-- CONTACT -->
 <section id="contact">
-  <div class="section-index reveal" style="text-align:center">06 / Contact</div>
+  <div class="section-index reveal" style="text-align:center">07 / Contact</div>
   <div class="contact-huge reveal">LET'S<br><span class="outline">CONNECT</span></div>
-  <a href=""
-   class="contact-email reveal">
-  <span class="__cf_email__"
-        data-cfemail="95ecf4e6fdbbf6f4fdfafaf9f0e6e6e0e7d5f0f8f4fcf9bbf6faf8">
-    homeshcahoolessur@gmail.com
-  </span>
-</a>
+  <a href="mailto:homeshcahoolessur@gmail.com" class="contact-email reveal">homeshcahoolessur@gmail.com</a>
   <div class="contact-links reveal">
-    <a href="https://www.linkedin.com/in/yash-cahoolessur-b4b5b4233/" target="_blank" class="contact-link">↗ LinkedIn</a>
-    <a href="https://yash-mysterio.github.io/cyber-portfolio/" target="_blank" class="contact-link">↗ GitHub</a>
-    <a href="tel:0489311067" class="contact-link">↗ 0489 311 067</a>
-    <a class="contact-link">📍 Hillcrest SA 5086</a>
+    <a href="https://www.linkedin.com/in/yash-cahoolessur-b4b5b4233/" target="_blank" rel="noopener" class="contact-link">↗ LinkedIn</a>
+    <a href="https://github.com/yash-mysterio" target="_blank" rel="noopener" class="contact-link">↗ GitHub</a>
+    <a href="tel:+61489311067" class="contact-link">↗ 0489 311 067</a>
+    <span class="contact-link">📍 Hillcrest SA 5086</span>
   </div>
 </section>
 
@@ -749,7 +792,7 @@ footer span.accent{color:var(--accent)}
 </footer>
 
 <!-- THREE.JS -->
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
 // ===== CURSOR =====
 const curD = document.getElementById('curD');
@@ -932,21 +975,10 @@ const obs = new IntersectionObserver(entries=>{
   entries.forEach(e=>{
     if(e.isIntersecting){
       e.target.classList.add('visible');
-      // Animate skill bars
-      e.target.querySelectorAll('.skill-bar-fill').forEach(b=>b.classList.add('animated'));
     }
   });
 },{threshold:0.12});
 revealEls.forEach(el=>obs.observe(el));
-
-// Also trigger skill bars when skills section enters view
-const skillSection = document.getElementById('skills');
-const skillObs = new IntersectionObserver(entries=>{
-  if(entries[0].isIntersecting){
-    document.querySelectorAll('.skill-bar-fill').forEach(b=>b.classList.add('animated'));
-  }
-},{threshold:0.1});
-skillObs.observe(skillSection);
 
 // ===== HAMBURGER =====
 const hamburger = document.getElementById('hamburger');
